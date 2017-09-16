@@ -19,12 +19,12 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
 				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
-				<button class="btn btn-success mx-1" onclick="location.href='#'"">Ventas</button>
-				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'"">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='#'"">Reportes</button>
-				<button class="btn btn-warning mx-1" onclick="location.href='staff.html'"">Personal</button>
-				<button class="btn btn-success mx-1" onclick="location.href='providers.html'"">Proveedores</button>
-				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'"">Clientes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='caja_admin.html'">Caja</button>
+				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
+				<button class="btn btn-success mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='staff.html'">Personal</button>
+				<button class="btn btn-success mx-1" onclick="location.href='providers.html'">Proveedores</button>
+				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item">
@@ -88,6 +88,12 @@
 				<div class="modal-body">
 					<form>
 						<div class="row">
+							<label for="staticName" class="col-sm-2 col-form-label">Cédula</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticName" value="2323432">
+							</div>
+						</div>
+						<div class="row">
 							<label for="staticName" class="col-sm-2 col-form-label">Nombre</label>
 							<div class="col-sm-10">
 								<input type="text" readonly class="form-control-plaintext" id="staticName" value="Nombre">
@@ -139,18 +145,20 @@
 					<form>
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="validationDefault01">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault01" placeholder="Nombre completo" required>
+							<label for="validationDefault02">Cédula</label>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" required>
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Usuario</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="Nombre de usuario" required>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
 							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Correo electronico" required>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="Correo electronico" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
@@ -159,18 +167,17 @@
 					<div class="row">
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault04">Ciudad</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="Ciudad" required>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="Ciudad" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault05">Dirección</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="Direccion" required>
+							<input type="text" class="form-control" id="validationDefault06" placeholder="Direccion" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault06" placeholder="telefono" required>
+							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" required>
 						</div>
 					</div>
-
 						<button class="btn btn-success" type="submit">Registrar</button>
 					</form>
 				</div>
@@ -198,14 +205,20 @@
 							<input type="text" class="form-control" id="validationDefault01" placeholder="nombre completo" value="Nombre" required>
 						</div>
 						<div class="col-md-6 mb-3">
+							<label for="validationDefault02">Cédula</label>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" value="12312323" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Usuario</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="nombre de usuario" value="Usuario" required>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" value="Usuario" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
 							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="correo electronico" value="ejemplo@email.com" required>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="correo electronico" value="ejemplo@email.com" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
@@ -214,25 +227,25 @@
 					<div class="row">
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault04">Ciudad</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="ciudad" value="Ciudad" required>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="ciudad" value="Ciudad" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault05">Dirección</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="direccion" value="Direccion" required>
+							<input type="text" class="form-control" id="validationDefault06" placeholder="direccion" value="Direccion" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault06" placeholder="telefono" value="2324223" required>
+							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" value="2324223" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault04">Contraseña</label>
-							<input type="password" class="form-control" id="validationDefault04" placeholder="contraseña" required>
+							<input type="password" class="form-control" id="validationDefault08" placeholder="contraseña" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault05">Confirmar Contraseña</label>
-							<input type="password" class="form-control" id="validationDefault05" placeholder="contraseña" required>
+							<input type="password" class="form-control" id="validationDefault09" placeholder="contraseña" required>
 						</div>
 					</div>
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 	<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css"/>
-	<title>Home | tienda.js</title>
+	<title>Reportes | tienda.js</title>
 </head>
 <body>
 
@@ -18,10 +18,10 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
-				<button class="btn btn-warning mx-1" onclick="location.href='index_admin.html'">Home</button>
+				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
 				<button class="btn btn-success mx-1" onclick="location.href='caja_admin.html'">Caja</button>
 				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='report.html'">Reportes</button>
 				<button class="btn btn-success mx-1" onclick="location.href='staff.html'">Personal</button>
 				<button class="btn btn-success mx-1" onclick="location.href='providers.html'">Proveedores</button>
 				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
@@ -34,11 +34,33 @@
 		</div>
 	</nav>
 
-	<div class="card col-xl-4 col-lg-4 col-md-6 col-sm-6 my-5 mx-auto">
-		<img class="card-img-top" src="../public/svg/profile.svg" alt="profile">
-		<div class="card-block">
-			<h4 class="card-title text-center">Soledad Ramirez</h4>
-		</div>
+	<div class="col-md-4 col-sm-12 mx-auto my-5 border border-secondary" id="login">
+		<form>
+			<div class="row">
+				<div class="col mb-3">
+					<label for="validationDefault01">Fecha Inicio</label>
+					<input type="date" class="form-control" id="validationDefault01" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col mb-3">
+					<label for="validationDefault02">Fecha cierre</label>
+					<input type="date" class="form-control" id="validationDefault02" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col mb-3">
+					<label for="validationDefault03">Tipo de reporte</label>
+					<select class="form-control" id="unitSelect" id="validationDefault03" required>
+						<option>&#32;</option>
+						<option>Compras</option>
+						<option>Ventas</option>
+						<option>Completo</option>
+					</select>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-success">Generar</button>
+		</form>
 	</div>
 
 	<script src="../public/js/jquery-3.2.1.min.js"></script>

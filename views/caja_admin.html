@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css"/>
+	<title>Home | tienda.js</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-3">
+		<a class="navbar-brand font-weight-bold" href="#">tienda.js</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mx-auto">
+				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='caja_admin.html'">Caja</button>
+				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
+				<button class="btn btn-success mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='staff.html'">Personal</button>
+				<button class="btn btn-success mx-1" onclick="location.href='providers.html'">Proveedores</button>
+				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Cerrar sesion</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="card w-75 my-5 mx-auto">
+		<div class="card-block">
+			<form class="p-5">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="staticName" class="col-form-label">Vendedor</label>
+					</div>
+					<div class="col-md-6">
+						<input type="text" readonly class="form-control-plaintext" id="staticName" value="Pepito Perez">
+						<input type="text" readonly class="form-control-plaintext" id="staticName" value="1213132">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="validationDefault01" class="col-form-label">Cliente</label>
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="validationDefault01" placeholder="Nombre completo">
+					</div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-md-8">
+						<input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" aria-label="Search">
+					</div>
+					<div class="col-md-4">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Añadir</button>
+					</div>
+				</div>
+			</form>
+			<div class="container">                                                                                    
+				<div class="table-responsive">          
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Nombre</th>
+								<th>Cantidad</th>
+								<th>Valor unid.</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>001</td>
+								<td>Café Black</td>
+								<td>
+									<input class="input-sm" id="inputsm" type="text" value="10">
+								</td>
+								<td>$ 10000</td>
+								<td class="bg-dark text-center">
+									<a href="#"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row">TOTAL</th>
+								<th scope="row">$ 100000</th>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table">
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="../public/js/jquery-3.2.1.min.js"></script>
+	<script src="../public/js/popper.min.js"></script>
+	<script src="../public/js/bootstrap.min.js"></script>
+</body>
+</html>

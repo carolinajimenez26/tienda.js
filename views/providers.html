@@ -18,12 +18,12 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
 				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
-				<button class="btn btn-success mx-1" onclick="location.href='#'"">Ventas</button>
-				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'"">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='#'"">Reportes</button>
-				<button class="btn btn-success mx-1" onclick="location.href='staff.html'"">Personal</button>
-				<button class="btn btn-warning mx-1" onclick="location.href='providers.html'"">Proveedores</button>
-				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'"">Clientes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='caja_admin.html'">Caja</button>
+				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
+				<button class="btn btn-success mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='staff.html'">Personal</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='providers.html'">Proveedores</button>
+				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item">
@@ -59,8 +59,8 @@
 						<td>contacto@mail.es</td>
 						<td><input type="checkbox" name="select"></td>
 						<td class="bg-dark text-center">
-							<a href="#"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-							<a href="#"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+							<a href="#" data-toggle="modal" data-target="#providerEdit"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+							<a href="#" data-toggle="modal" data-target="#providerDelete"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -70,18 +70,123 @@
 						<td>contacto@mail.es</td>
 						<td><input type="checkbox" name="select"></td>
 						<td class="bg-dark text-center">
-							<a href="#"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-							<a href="#"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+							<a href="#" data-toggle="modal" data-target="#providerEdit"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+							<a href="#" data-toggle="modal" data-target="#providerDelete"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="w-25 mx-auto">
-			<button class="btn btn-outline-success">Agregar</button>
+			<a href="#" data-toggle="modal" data-target="#providerRegister"><button class="btn btn-outline-success">Agregar</button></a>
 			<button class="btn btn-success">Enviar</button>
 		</div>
 	</div>
+
+	<!-- modal to provider register -->
+	<div id="providerRegister" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Registrar proveedor</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+					<div class="row">
+						<div class="col-md-4 mb-3">
+							<label for="validationDefault01">Nit</label>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="Nit proveedor" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="validationDefault01">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="Nombre proveedor" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="validationDefault06">Telefono</label>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="telefono" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<label for="validationDefault03">Correo-e</label>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="Correo electronico" required>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+					</div>
+						<button class="btn btn-success" type="submit">Registrar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal to client edit -->
+	<div id="providerEdit" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Editar proveedor</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault01">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault01" value="Nombre completo" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault06">Telefono</label>
+							<input type="text" class="form-control" id="validationDefault02" value="telefono" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<label for="validationDefault03">Correo-e</label>
+							<input type="text" class="form-control" id="validationDefault03" value="Correo electronico" required>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+					</div>
+						<button class="btn btn-success" type="submit">Confirmar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal to delete -->
+	<div id="providerDelete" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Confirmar Eliminación</h4>
+				</div>
+				<div class="modal-body">
+				<p> ¿Desea continuar con la eliminación del proveedor?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="../public/js/jquery-3.2.1.min.js"></script>
 	<script src="../public/js/popper.min.js"></script>
 	<script src="../public/js/bootstrap.min.js"></script>

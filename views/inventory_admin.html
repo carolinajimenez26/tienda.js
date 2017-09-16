@@ -19,12 +19,12 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
 				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
-				<button class="btn btn-success mx-1" onclick="location.href='#'"">Ventas</button>
-				<button class="btn btn-warning mx-1" onclick="location.href='inventory_admin.html'"">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='#'"">Reportes</button>
-				<button class="btn btn-success mx-1" onclick="location.href='staff.html'"">Personal</button>
-				<button class="btn btn-success mx-1" onclick="location.href='providers.html'"">Proveedores</button>
-				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'"">Clientes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='caja_admin.html'">Caja</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
+				<button class="btn btn-success mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='staff.html'">Personal</button>
+				<button class="btn btn-success mx-1" onclick="location.href='providers.html'">Proveedores</button>
+				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item">
@@ -51,9 +51,9 @@
 				</p>
 			</div>
 			<span class="text-center bg-dark">
-				<a href="#"><img src="../public/svg/more.svg" width="30px" class="p-1" alt="more"/></a>
-				<a href="#"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-				<a href="#"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+				<a href="#" data-toggle="modal" data-target="#productMore"><img src="../public/svg/more.svg" width="30px" class="p-1" alt="more"/></a>
+				<a href="#" data-toggle="modal" data-target="#productEdit"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+				<a href="#" data-toggle="modal" data-target="#productDelete"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 			</span>
 		</div>
 		<div class="card p-2 m-2 col-xl-2 col-lg-2 col-md-4">
@@ -67,9 +67,9 @@
 				</p>
 			</div>
 			<span class="text-center bg-dark">
-				<a href="#"><img src="../public/svg/more.svg" width="30px" class="p-1" alt="more"/></a>
-				<a href="#"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-				<a href="#"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+				<a href="#" data-toggle="modal" data-target="#productMore"><img src="../public/svg/more.svg" width="30px" class="p-1" alt="more"/></a>
+				<a href="#" data-toggle="modal" data-target="#productEdit"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+				<a href="#" data-toggle="modal" data-target="#productDelete"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 			</span>
 		</div>
 		<div class="card p-2 m-2 col-xl-2 col-lg-2 col-md-4">
@@ -83,18 +83,219 @@
 				</p>
 			</div>
 			<span class="text-center bg-dark">
-				<a href="#"><img src="../public/svg/more.svg" width="30px" class="p-1" alt="more"/></a>
-				<a href="#"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-				<a href="#"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+				<a href="#" data-toggle="modal" data-target="#productMore"><img src="../public/svg/more.svg" width="30px" class="p-1" alt="more"/></a>
+				<a href="#" data-toggle="modal" data-target="#productEdit"><img src="../public/svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+				<a href="#" data-toggle="modal" data-target="#productDelete"><img src="../public/svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 			</span>
 		</div>
 		<div class="card bg-success p-2 m-2 col-xl-2 col-lg-2 col-md-4">
-			<a href="#"><img class="card-img-top" src="../public/svg/add-product.svg" alt="add product"/></a>
+			<a href="#" data-toggle="modal" data-target="#productRegister"><img class="card-img-top" src="../public/svg/add-product.svg" alt="add product"/></a>
 			<div class="card-block p-2">
 				<h4 class="card-title text-center text-white">Agregar</h4>
 			</div>
 		</div>
 	</div>
+
+	<!-- modal to register -->	
+	<div id="productRegister" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Registrar producto</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault01">Código</label>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="código prod" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault02">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="Nombre prod" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Cantidad</label>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="cantidad prod" required>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Unidad</label>
+								<select class="form-control" id="unitSelect" id="validationDefault03" required>
+									<option>Botellas</option>
+									<option>Libras</option>
+									<option>Cajas</option>
+									<option>Bolsas</option>
+								</select>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault04">Stock minimo</label>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="cant min" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault05">Proveedor</label>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" required>
+						</div>
+					</div>
+						<button class="btn btn-success" type="submit">Registrar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal to View more -->
+	<div id="productMore" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Información</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row">
+							<label for="staticName" class="col-sm-2 col-form-label">Código</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticName" value="001">
+							</div>
+						</div>
+						<div class="row">
+							<label for="staticName" class="col-sm-2 col-form-label">Nombre</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticName" value="Producto X">
+							</div>
+						</div>
+						<div class="row">
+							<label for="staticName" class="col-sm-2 col-form-label">Cantidad</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticName" value="34">
+							</div>
+						</div>
+						<div class="row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="cajas">
+							</div>
+						</div>
+						<div class="row">
+							<label for="staticName" class="col-sm-2 col-form-label">Stock minimo</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticName" value="10">
+							</div>
+						</div>
+						<div class="row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">Proveedor</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="colombina">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal to edit -->	
+	<div id="productEdit" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Editar producto</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault01">Código</label>
+							<input type="text" class="form-control" id="validationDefault01" value="código prod" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault02">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault02" value="Nombre prod" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Cantidad</label>
+							<input type="text" class="form-control" id="validationDefault03" value="cantidad prod" required>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Unidad</label>
+								<select class="form-control" id="unitSelect" id="validationDefault03" required>
+									<option>Botellas</option>
+									<option>Libras</option>
+									<option>Cajas</option>
+									<option>Bolsas</option>
+								</select>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault04">Stock minimo</label>
+							<input type="text" class="form-control" id="validationDefault04" value="cant min" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault05">Proveedor</label>
+							<input type="text" class="form-control" id="validationDefault05" value="proveedor del producto" required>
+						</div>
+					</div>
+						<button class="btn btn-success" type="submit">Confirmar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal to delete -->
+	<div id="productDelete" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Confirmar Eliminación</h4>
+				</div>
+				<div class="modal-body">
+				<p> ¿Desea continuar con la eliminación del producto?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="../public/js/jquery-3.2.1.min.js"></script>
 	<script src="../public/js/popper.min.js"></script>
 	<script src="../public/js/bootstrap.min.js"></script>
