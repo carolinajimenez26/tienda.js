@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css"/>
+	<title>Reportes | tienda.js</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-3">
+		<a class="navbar-brand font-weight-bold" href="#">tienda.js</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mx-auto">
+				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
+				<button class="btn btn-success mx-1" onclick="location.href='caja_admin.html'">Caja</button>
+				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='staff.html'">Personal</button>
+				<button class="btn btn-success mx-1" onclick="location.href='providers.html'">Proveedores</button>
+				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Cerrar sesion</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="col-md-4 col-sm-12 mx-auto my-5 border border-secondary" id="login">
+		<form>
+			<div class="row">
+				<div class="col mb-3">
+					<label for="validationDefault01">Fecha Inicio</label>
+					<input type="date" class="form-control" id="validationDefault01" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col mb-3">
+					<label for="validationDefault02">Fecha cierre</label>
+					<input type="date" class="form-control" id="validationDefault02" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col mb-3">
+					<label for="validationDefault03">Tipo de reporte</label>
+					<select class="form-control" id="unitSelect" id="validationDefault03" required>
+						<option>&#32;</option>
+						<option>Compras</option>
+						<option>Ventas</option>
+						<option>Completo</option>
+					</select>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-success">Generar</button>
+		</form>
+	</div>
+
+	<script src="../public/js/jquery-3.2.1.min.js"></script>
+	<script src="../public/js/popper.min.js"></script>
+	<script src="../public/js/bootstrap.min.js"></script>
+</body>
+</html>
