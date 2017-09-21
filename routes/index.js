@@ -6,8 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/caja', function(req, res, next) {
-  res.render('caja');
+router.get('/invoice', function(req, res, next) {
+  res.render('invoice');
 });
 
 module.exports = router;
