@@ -6,28 +6,32 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/index_admin', function(req, res, next) {
-  res.render('index_admin');
-});
-
 router.get('/invoice', function(req, res, next) {
   res.render('invoice');
-});
-
-router.get('/invoice_admin', function(req, res, next) {
-  res.render('invoice_admin');
 });
 
 router.get('/inventory', function(req, res, next) {
   res.render('inventory');
 });
 
-router.get('/inventory_admin', function(req, res, next) {
-  res.render('inventory_admin');
+router.get('/login', function(req, res, next) {
+  res.render('login');
 });
 
 router.get('/clients', function(req, res, next) {
-  res.redirect('/users/clients');
+  res.render('clients');
+});
+
+router.get('/providers', function(req, res, next) {
+  res.render('providers');
+});
+
+router.get('/report', function(req, res, next) {
+  res.render('report');
+});
+
+router.get('/staff', function(req, res, next) {
+  res.render('staff');
 });
 
 module.exports = router;

@@ -33,13 +33,9 @@ router.post('/register', function(req, res) {
   });
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('login');
-});
-
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    console.log(user);
+    console.log("user: ", user);
     if (err) {
       return next(err);
     }
@@ -50,6 +46,7 @@ router.post('/login', function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) {
+
         return res.status(500).json({
           err: 'Could not log in user'
         });
@@ -70,26 +67,6 @@ router.get('/logout', function(req, res) {
   res.status(200).json({
     status: 'Bye!'
   });
-});
-
-router.get('/clients_admin', function(req, res, next) {
-  res.render('clients_admin');
-});
-
-router.get('/clients', function(req, res, next) {
-  res.render('clients');
-});
-
-router.get('/providers', function(req, res, next) {
-  res.render('providers');
-});
-
-router.get('/report', function(req, res, next) {
-  res.render('report');
-});
-
-router.get('/staff', function(req, res, next) {
-  res.render('staff');
 });
 
 module.exports = router;
