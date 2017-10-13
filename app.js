@@ -78,3 +78,41 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//Enlace al controlador product
+var ProductModel = require('./models/Product')(app, mongoose);//Ojo con la sintaxis
+var ProductCtrl = require('./controllers/product');
+
+var products = express.Router();
+
+products.route('/inventory').get(ProductCtrl.findAllProducts).post(ProductCtrl.addProduct);
+
+products.route('/inventory/:id').get(ProductCtrl.findById).put(ProductCtrl.updateProduct).delete(ProductCtrl.deleteProduct);
+
+app.use('/inventory', products);
+
+
+//Enlace al controlador client
+var ClientModel = require('./models/Client')(app, mongoose);//Ojo con la sintaxis
+var ClientCtrl = require('./controllers/client');
+
+var clients = express.Router();
+
+clients.route('/clients').get(ClientCtrl.findAllClients).post(ClientCtrl.addClient);
+
+clients.route('/clients/:id').get(ClientCtrl.findById).put(ClientCtrl.updateClient).delete(ProductCtrl.deleteClient);
+
+app.use('/clients', clients);
+
+
+//Enlace al controlador provider
+var ProviderModel = require('./models/Provider')(app, mongoose);//Ojo con la sintaxis
+var ProviderCtrl = require('./controllers/provider');
+
+var providers = express.Router();
+
+providers.route('/providers').get(ProviderCtrl.findAllProviders).post(ProviderCtrl.addProvider);
+
+providers.route('/providers/:id').get(ProviderCtrl.findById).put(ProviderCtrl.updateProvider).delete(ProviderCtrl.deleteProvider);
+
+app.use('/providers', providers);
