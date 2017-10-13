@@ -1,40 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-	<link rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css"/>
-	<title>Inventario | tienda.js</title>
+	<% include head %>
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-3">
-		<a class="navbar-brand font-weight-bold" href="#">tienda.js</a>
-
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mx-auto">
-				<button class="btn btn-success mx-1" onclick="location.href='/'">Home</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/invoice'">Caja</button>
-				<button class="btn btn-warning mx-1" onclick="location.href='/inventory'">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/report'">Reportes</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/staff'">Personal</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/providers'">Proveedores</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/clients'">Clientes</button>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item">
-					<a class="nav-link" href="#">Cerrar sesion</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<header>
+		<% include header_admin %>
+	</header>
+	
 	<nav class="navbar navbar-light bg-light mt-5">
-		<form class="form-inline mx-auto">
+		<form class="form-inline mx-auto" method="GET">
 			<input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 		</form>
@@ -106,28 +82,28 @@
 					<h4 class="modal-title">Registrar producto</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form method="POST">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault01">Código</label>
-							<input type="text" class="form-control" id="validationDefault01" placeholder="código prod" required>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="código prod" name="code" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="Nombre prod" required>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="Nombre prod" name="name" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault03">Cantidad</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="cantidad prod" required>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="cantidad prod" name="count" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault03">Unidad</label>
-								<select class="form-control" id="unitSelect" id="validationDefault03" required>
+								<select class="form-control" id="unitSelect" id="validationDefault03" name="unit" required>
 									<option>Botellas</option>
 									<option>Libras</option>
 									<option>Cajas</option>
@@ -141,11 +117,11 @@
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault04">Stock minimo</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="cant min" required>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="cant min" name="stock-min" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault05">Proveedor</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" required>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" name="provider" required>
 						</div>
 					</div>
 						<button class="btn btn-success" type="submit">Registrar</button>
@@ -224,28 +200,28 @@
 					<h4 class="modal-title">Editar producto</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form method="POST">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault01">Código</label>
-							<input type="text" class="form-control" id="validationDefault01" value="código prod" required>
+							<input type="text" class="form-control" id="validationDefault01" value="código prod" name="code" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault02" value="Nombre prod" required>
+							<input type="text" class="form-control" id="validationDefault02" value="Nombre prod" name="name" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault03">Cantidad</label>
-							<input type="text" class="form-control" id="validationDefault03" value="cantidad prod" required>
+							<input type="text" class="form-control" id="validationDefault03" value="cantidad prod" name="count" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault03">Unidad</label>
-								<select class="form-control" id="unitSelect" id="validationDefault03" required>
+								<select class="form-control" id="unitSelect" id="validationDefault03" name="unit" required>
 									<option>Botellas</option>
 									<option>Libras</option>
 									<option>Cajas</option>
@@ -259,11 +235,11 @@
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault04">Stock minimo</label>
-							<input type="text" class="form-control" id="validationDefault04" value="cant min" required>
+							<input type="text" class="form-control" id="validationDefault04" value="cant min" name="stock-min" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault05">Proveedor</label>
-							<input type="text" class="form-control" id="validationDefault05" value="proveedor del producto" required>
+							<input type="text" class="form-control" id="validationDefault05" value="proveedor del producto" name="provider" required>
 						</div>
 					</div>
 						<button class="btn btn-success" type="submit">Confirmar</button>
@@ -296,8 +272,8 @@
 		</div>
 	</div>
 
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<footer>
+		<% include footer %>
+	</footer>
 </body>
 </html>
