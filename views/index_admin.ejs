@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-	<link rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css"/>
-	<title>Home | tienda.js</title>
+	<% include head %>
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-3">
-		<a class="navbar-brand font-weight-bold" href="#">tienda.js</a>
-
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mx-auto">
-				<button class="btn btn-warning mx-1" onclick="location.href='/'">Home</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/invoice'">Caja</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/inventory'">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/report'">Reportes</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/staff'">Personal</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/providers'">Proveedores</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/clients'">Clientes</button>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item">
-					<a class="nav-link" href="#">Cerrar sesion</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<header>
+		<% include header_admin %>
+	</header>
 
 	<div class="card col-xl-4 col-lg-4 col-md-6 col-sm-6 my-5 mx-auto">
 		<img class="card-img-top" src="svg/profile.svg" alt="profile">
@@ -41,8 +16,8 @@
 		</div>
 	</div>
 
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<footer>
+		<% include footer %>
+	</footer>
 </body>
 </html>

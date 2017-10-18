@@ -1,38 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-	<link rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css"/>
-	<title>Personal | tienda.js</title>
+	<% include head %>
 </head>
 <body>
-
-	<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-3">
-		<a class="navbar-brand font-weight-bold" href="#">tienda.js</a>
-
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mx-auto">
-				<button class="btn btn-success mx-1" onclick="location.href='/index'">Home</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/caja'">Caja</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/inventory'">Inventario</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/report'">Reportes</button>
-				<button class="btn btn-warning mx-1" onclick="location.href='/staff'">Personal</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/providers'">Proveedores</button>
-				<button class="btn btn-success mx-1" onclick="location.href='/clients'">Clientes</button>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item">
-				<a class="nav-link" href="#">Cerrar sesion</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<header>
+		<% include header_admin %>
+	</header>
 
 	<div class="row my-5 mx-auto" id="staff">
 		<div class="card bg-dark p-2 m-2 col-xl-2 col-lg-2 col-md-4">
@@ -142,23 +116,23 @@
 					<h4 class="modal-title">Registrar vendedor</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form method="POST">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Cédula</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" required>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" name="identity" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Usuario</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" required>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" name="user" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
 							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="Correo electronico" required>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="Correo electronico" name="mail" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
@@ -167,15 +141,15 @@
 					<div class="row">
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault04">Ciudad</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="Ciudad" required>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="Ciudad" name="city" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault05">Dirección</label>
-							<input type="text" class="form-control" id="validationDefault06" placeholder="Direccion" required>
+							<input type="text" class="form-control" id="validationDefault06" placeholder="Direccion" name="address" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" required>
+							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" name="phone" required>
 						</div>
 					</div>
 						<button class="btn btn-success" type="submit">Registrar</button>
@@ -198,27 +172,27 @@
 					<h4 class="modal-title">Editar vendedor</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form method="POST">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault01">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault01" placeholder="nombre completo" value="Nombre" required>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="nombre completo" name="name" value="Nombre" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Cédula</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" value="12312323" required>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" name="identity" value="12312323" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault02">Usuario</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" value="Usuario" required>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" name="user" value="Usuario" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 mb-3">
 							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="correo electronico" value="ejemplo@email.com" required>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="correo electronico" name="mail" value="ejemplo@email.com" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
@@ -227,25 +201,25 @@
 					<div class="row">
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault04">Ciudad</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="ciudad" value="Ciudad" required>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="ciudad" name="city" value="Ciudad" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault05">Dirección</label>
-							<input type="text" class="form-control" id="validationDefault06" placeholder="direccion" value="Direccion" required>
+							<input type="text" class="form-control" id="validationDefault06" placeholder="direccion" name="address" value="Direccion" required>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" value="2324223" required>
+							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" name="phone" value="2324223" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault04">Contraseña</label>
-							<input type="password" class="form-control" id="validationDefault08" placeholder="contraseña" required>
+							<input type="password" class="form-control" id="validationDefault08" placeholder="contraseña" name="password" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault05">Confirmar Contraseña</label>
-							<input type="password" class="form-control" id="validationDefault09" placeholder="contraseña" required>
+							<input type="password" class="form-control" id="validationDefault09" placeholder="contraseña" name="repassword" required>
 						</div>
 					</div>
 
@@ -279,9 +253,8 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<footer>
+		<% include footer %>
+	</footer>
 </body>
 </html>
