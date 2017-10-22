@@ -13,6 +13,10 @@
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 		</form>
 	</nav>
+
+	
+	
+
 	<div class="container">                                                                                    
 		<div class="table-responsive">          
 			<table class="table">
@@ -22,33 +26,54 @@
 						<th>Nombre</th>
 						<th>Telefono</th>
 						<th>Correo-e</th>
-						<th></th>
+						
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1001</td>
-						<td>Colombina</td>
-						<td>353 456</td>
-						<td>contacto@mail.es</td>
-						<td><input type="checkbox" name="select"></td>
-						<td class="bg-dark text-center">
-							<a href="#" data-toggle="modal" data-target="#providerEdit">svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-							<a href="#" data-toggle="modal" data-target="#providerDelete">svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
-						</td>
-					</tr>
-					<tr>
-						<td>1002</td>
-						<td>Colombina</td>
-						<td>353 456</td>
-						<td>contacto@mail.es</td>
-						<td><input type="checkbox" name="select"></td>
-						<td class="bg-dark text-center">
-							<a href="#" data-toggle="modal" data-target="#providerEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-							<a href="#" data-toggle="modal" data-target="#providerDelete"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
-						</td>
-					</tr>
+					<%
+					for(var i = 0; i < providers.length; i++)
+					{
+						var provider = providers[i];
+					%>
+						<tr>
+							<td><%=provider.NIT%></td>
+							<td><%=provider.name%></td>
+							<td><%=provider.phone%></td>
+							<td><%=provider.email%></td>
+							<!--<td><input type="checkbox" name="select"></td>-->
+							<td class="bg-dark text-center">
+								<a href="#" data-toggle="modal" data-target="#providerEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+								<a href="#" data-toggle="modal" data-target="#providerDelete<%=provider.NIT%>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+							</td>
+						</tr>
+
+
+
+						<!-- Modal to delete -->
+						<div id="providerDelete<%=provider.NIT%>" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">Confirmar Eliminación</h4>
+									</div>
+									<div class="modal-body">
+									<p> ¿Desea continuar con la eliminación del proveedor?</p>
+									</div>
+									<div class="modal-footer">
+										<a href='/providers/delete/<%=provider%>?_method=DELETE'><button type="button" class="btn btn-success" >Confirmar</button></a>
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					<% } %>					
 				</tbody>
 			</table>
 		</div>
@@ -68,7 +93,7 @@
 					<h4 class="modal-title">Registrar proveedor</h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST">
+					<form action="/providers/register" method="POST">
 					<div class="row">
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault01">Nit</label>
@@ -142,25 +167,7 @@
 		</div>
 	</div>
 
-	<!-- Modal to delete -->
-	<div id="providerDelete" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Confirmar Eliminación</h4>
-				</div>
-				<div class="modal-body">
-				<p> ¿Desea continuar con la eliminación del proveedor?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<footer>
 		<% include footer %>

@@ -1,13 +1,15 @@
-var Provider = mongoose.model('../controllers/provider');
+var Provider = require('../models/provider');
 
 
 //Retornar todos los proveedores
 exports.findAllProviders = function(req, res) {
-	Provider.find(function(err, providers) {
+	Provider.find(function(err, data) {
 		if(err) res.send(500, err.message);
 
 		console.log('GET /providers');
-		res.status(200).jsonp(providers);
+		//res.status(200).jsonp(providers);
+		res.render('providers',{providers:data});
+
 	});
 };
 
@@ -30,9 +32,9 @@ exports.addProvider = function(req, res) {
 	console.log(req.body);
 
 	var provider = new Provider( {
-		NIT: 		req.body.NIT,
+		NIT: 		req.body.nit,
 		name: 		req.body.name,
-		email: 		req.body.email,
+		email: 		req.body.mail,
 		phone: 		req.body.phone,
 		address: 	req.body.address,
 		products: 	req.body.products	//Verificar como se pasaria una lista de productos
@@ -48,12 +50,12 @@ exports.addProvider = function(req, res) {
 //Actualizar un registro proveedor en la DB (PUT)
 exports.updateProvider = function(req, res) {
 	Provider.findById(req.params.id, function(err, provider) {
-		provider.NIT: 			req.body.NIT,
-		provider.name: 			req.body.name,
-		provider.email: 		req.body.email,
-		provider.phone: 		req.body.phone,
-		provider.address: 		req.body.address,
-		provider.products: 		req.body.products	//Verificar como se pasaria una lista de productos
+		provider.NIT= 			req.body.NIT,
+		provider.name= 			req.body.name,
+		provider.email= 		req.body.email,
+		provider.phone= 		req.body.phone,
+		provider.address= 		req.body.address,
+		provider.products= 		req.body.products	//Verificar como se pasaria una lista de productos
 
 
 		provider.save(function(err) {

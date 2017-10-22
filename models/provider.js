@@ -22,11 +22,12 @@ var ProviderSchema = new Schema({
     },
     address: {
       type: String,
-      default: ''},
-    products: {
+      default: ''}
+    },
+  /*  products: {
       [ { type: String, require: true} ] // array de productos
     }
-}, {
+}, */{
   timestamp: true
 });
 

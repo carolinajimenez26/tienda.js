@@ -22,10 +22,11 @@ router.get('/clients', function(req, res, next) {
   res.render('clients');
 });
 
+/*
 router.get('/providers', function(req, res, next) {
   res.render('providers');
 });
-
+*/
 router.get('/report', function(req, res, next) {
   res.render('report');
 });

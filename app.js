@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('./models/user');
+//var Provider = require('./models/provider');
 var config = require('./config');
 
 mongoose.connect(config.mongoUrl);
@@ -20,6 +21,7 @@ db.once('open', function () {
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var providers = require('./routes/providers');
 
 var app = express();
 
@@ -46,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/providers', providers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
