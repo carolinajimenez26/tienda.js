@@ -3,15 +3,19 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('login');
+});
+
+router.get('/home', function(req, res, next) {
+  res.render('index_admin');
 });
 
 router.get('/invoice', function(req, res, next) {
-  res.render('invoice');
+  res.render('invoice_admin');
 });
 
 router.get('/inventory', function(req, res, next) {
-  res.render('inventory');
+  res.render('inventory_admin');
 });
 
 router.get('/login', function(req, res, next) {
@@ -19,7 +23,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/clients', function(req, res, next) {
-  res.render('clients');
+  res.render('clients_admin');
 });
 
 router.get('/providers', function(req, res, next) {
@@ -31,7 +35,14 @@ router.get('/report', function(req, res, next) {
 });
 
 router.get('/staff', function(req, res, next) {
-  res.render('staff');
+  let locals = {
+  	clients : [ 
+  		 {username:"juan", password:"rGFHFGjjkhgfgWEAaswqQWSe", firstname: "Sebastian", lastname:"Hoyos"},
+ 		 {username:"julidavid", password:"HJHgfFGGFWQWQWqqwredWE", firstname:"David", lastname:"Hoyos"},
+ 		 {username:"julidavid017", password:"HJHgfFGGFWQWQWqqwredWE", firstname:"Julian", lastname:"Marin"}
+  	]
+  }
+  res.render('staff', locals);
 });
 
 module.exports = router;

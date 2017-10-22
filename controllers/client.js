@@ -57,7 +57,7 @@ exports.findById = function(req, res) {
 };
 
 exports.registerClient = function(req, res) {
-  User.register(new User({ username : req.body.username }),
+  Client.register(new Client({ username : req.body.username }),
   req.body.password, function(err, user) {
     if (err) {
       return res.status(500).json({err: err});

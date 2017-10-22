@@ -9,99 +9,126 @@
 	</header>
 
 	<div class="row my-5 mx-auto" id="staff">
+	<% for(var i = 0; i < clients.length; i++){ %>
 		<div class="card bg-dark p-2 m-2 col-xl-2 col-lg-2 col-md-4">
 			<a href="#"><img class="card-img-top" src="svg/person.svg" alt="profile"/></a>
 			<div class="card-block p-2">
-				<h4 class="card-title text-center text-white">Carolina Jimenez</h4>
+				<h4 class="card-title text-center text-white"><%= clients[i].firstname %> <%= clients[i].lastname %></h4>
 			</div>
 			<span class="text-center">
-				<a href="#" data-toggle="modal" data-target="#staffMore"><img src="svg/more.svg" width="30px" class="p-1" alt="more"/></a>
-				<a href="#" data-toggle="modal" data-target="#staffEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-				<a href="#" data-toggle="modal" data-target="#staffDelete"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+				<a href="#" data-toggle="modal" data-target="#staffMore<%= i %>"><img src="svg/more.svg" width="30px" class="p-1" alt="more"/></a>
+				<a href="#" data-toggle="modal" data-target="#staffEdit<%= i %>"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+				<a href="#" data-toggle="modal" data-target="#staffDelete<%= i %>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 			</span>
 		</div>
-		<div class="card bg-dark p-2 m-2 col-xl-2 col-lg-2 col-md-4">
-			<a href="#"><img class="card-img-top" src="svg/person.svg" alt="profile"/></a>
-			<div class="card-block p-2">
-				<h4 class="card-title text-center text-white">Juan Bedoya</h4>
+
+		<!-- Modal to View more -->
+		<div id="staffMore<%= i %>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Información</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<label for="staticUser" class="col-sm-2 col-form-label">Usuario</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= clients[i].username %>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticName" class="col-sm-2 col-form-label">Nombre</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= clients[i].firstname %>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticLastname" class="col-sm-2 col-form-label">Apellido</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticLastname" value="<%= clients[i].lastname %>">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
 			</div>
-			<span class="text-center">
-				<a href="#" data-toggle="modal" data-target="#staffMore"><img src="svg/more.svg" width="30px" class="p-1" alt="more"/></a>
-				<a href="#" data-toggle="modal" data-target="#staffEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-				<a href="#" data-toggle="modal" data-target="#staffDelete"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
-			</span>
 		</div>
-		<div class="card bg-dark p-2 m-2 col-xl-2 col-lg-2 col-md-4">
-			<a href="#"><img class="card-img-top" src="svg/person.svg" alt="profile"/></a>
-			<div class="card-block p-2">
-				<h4 class="card-title text-center text-white">Gustavo nomelose</h4>
+
+		<!-- Modal to Edit -->
+		<div id="staffEdit<%= i %>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Editar vendedor</h4>
+					</div>
+					<div class="modal-body">
+						<form action="/users/modify" method="POST">
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault01">Usuario</label>
+								<input type="text" class="form-control" id="validationDefault01" placeholder="usuario" name="username" value="<%= clients[i].username %>" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault02">Contraseña</label>
+								<input type="password" class="form-control" id="validationDefault02" placeholder="contraseña" name="pasword" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault03">Nombre</label>
+								<input type="text" class="form-control" id="validationDefault03" placeholder="nombre" name="firstname" value="<%= clients[i].firstname %>" required>
+							</div>
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault04">Apellido</label>
+								<input type="text" class="form-control" id="validationDefault04" placeholder="apellido" name="lastname" value="<%= clients[i].lastname %>" required>
+							</div>
+						</div>
+
+
+							<button class="btn btn-success" type="submit">Confirmar</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
 			</div>
-			<span class="text-center">
-				<a href="#" data-toggle="modal" data-target="#staffMore"><img src="svg/more.svg" width="30px" class="p-1" alt="more"/></a>
-				<a href="#" data-toggle="modal" data-target="#staffEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-				<a href="#" data-toggle="modal" data-target="#staffDelete"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
-			</span>
 		</div>
+
+		<!-- Modal to delete -->
+		<div id="staffDelete<%= i %>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Confirmar Eliminación</h4>
+					</div>
+					<div class="modal-body">
+					<p> ¿Desea continuar con la eliminación del perfil?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% } %>
 		<div class="card bg-success p-2 m-2 col-xl-2 col-lg-2 col-md-4">
 			<a href="#" data-toggle="modal" data-target="#staffRegister"><img class="card-img-top" src="svg/add-person.svg" alt="add person"/></a>
 			<div class="card-block p-2">
 				<h4 class="card-title text-center text-white">Agregar</h4>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal to View more -->
-	<div id="staffMore" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Información</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="row">
-							<label for="staticName" class="col-sm-2 col-form-label">Cédula</label>
-							<div class="col-sm-10">
-								<input type="text" readonly class="form-control-plaintext" id="staticName" value="2323432">
-							</div>
-						</div>
-						<div class="row">
-							<label for="staticName" class="col-sm-2 col-form-label">Nombre</label>
-							<div class="col-sm-10">
-								<input type="text" readonly class="form-control-plaintext" id="staticName" value="Nombre">
-							</div>
-						</div>
-						<div class="row">
-							<label for="staticName" class="col-sm-2 col-form-label">Ciudad</label>
-							<div class="col-sm-10">
-								<input type="text" readonly class="form-control-plaintext" id="staticName" value="Ciudad">
-							</div>
-						</div>
-						<div class="row">
-							<label for="staticName" class="col-sm-2 col-form-label">Dirección</label>
-							<div class="col-sm-10">
-								<input type="text" readonly class="form-control-plaintext" id="staticName" value="Direccion">
-							</div>
-						</div>
-						<div class="row">
-							<label for="staticName" class="col-sm-2 col-form-label">Telefono</label>
-							<div class="col-sm-10">
-								<input type="text" readonly class="form-control-plaintext" id="staticName" value="3434 4324">
-							</div>
-						</div>
-						<div class="row">
-							<label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-							<div class="col-sm-10">
-								<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -116,40 +143,27 @@
 					<h4 class="modal-title">Registrar vendedor</h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST">
+					<form action="/users/register" method="POST">
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="validationDefault02">Cédula</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" name="identity" required>
+							<label for="validationDefault01">Usuario</label>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="usuario" name="username" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="validationDefault02">Usuario</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" name="user" required>
+							<label for="validationDefault02">Contraseña</label>
+							<input type="password" class="form-control" id="validationDefault02" placeholder="contraseña" name="password" required>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 mb-3">
-							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="Correo electronico" name="mail" required>
-							<div class="invalid-feedback">
-								Escriba un correo Válido
-							</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="nombre" name="firstname" required>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 mb-3">
-							<label for="validationDefault04">Ciudad</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="Ciudad" name="city" required>
-						</div>
-						<div class="col-md-4 mb-3">
-							<label for="validationDefault05">Dirección</label>
-							<input type="text" class="form-control" id="validationDefault06" placeholder="Direccion" name="address" required>
-						</div>
-						<div class="col-md-4 mb-3">
-							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" name="phone" required>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault04">Apellido</label>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="apellido" name="lastname" required>
 						</div>
 					</div>
 						<button class="btn btn-success" type="submit">Registrar</button>
@@ -157,98 +171,6 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal to Edit -->
-	<div id="staffEdit" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Editar vendedor</h4>
-				</div>
-				<div class="modal-body">
-					<form method="POST">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault01">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault01" placeholder="nombre completo" name="name" value="Nombre" required>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault02">Cédula</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="# cédula" name="identity" value="12312323" required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault02">Usuario</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Nombre de usuario" name="user" value="Usuario" required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault04" placeholder="correo electronico" name="mail" value="ejemplo@email.com" required>
-							<div class="invalid-feedback">
-								Escriba un correo Válido
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 mb-3">
-							<label for="validationDefault04">Ciudad</label>
-							<input type="text" class="form-control" id="validationDefault05" placeholder="ciudad" name="city" value="Ciudad" required>
-						</div>
-						<div class="col-md-4 mb-3">
-							<label for="validationDefault05">Dirección</label>
-							<input type="text" class="form-control" id="validationDefault06" placeholder="direccion" name="address" value="Direccion" required>
-						</div>
-						<div class="col-md-4 mb-3">
-							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault07" placeholder="telefono" name="phone" value="2324223" required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault04">Contraseña</label>
-							<input type="password" class="form-control" id="validationDefault08" placeholder="contraseña" name="password" required>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault05">Confirmar Contraseña</label>
-							<input type="password" class="form-control" id="validationDefault09" placeholder="contraseña" name="repassword" required>
-						</div>
-					</div>
-
-
-						<button class="btn btn-success" type="submit">Confirmar</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal to delete -->
-	<div id="staffDelete" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Confirmar Eliminación</h4>
-				</div>
-				<div class="modal-body">
-				<p> ¿Desea continuar con la eliminación del perfil?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>
 		</div>
