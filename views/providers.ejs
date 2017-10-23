@@ -20,31 +20,104 @@
 					<tr>
 						<th>Nit</th>
 						<th>Nombre</th>
-						<th>Telefono</th>
 						<th>Correo-e</th>
-						<th></th>
+						<th>Telefono</th>
+						<th>Direccion</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
+				<% for(var i = 0; i < providers.length; i++){ %>
 					<tr>
-						<td>1001</td>
-						<td>Colombina</td>
-						<td>353 456</td>
-						<td>contacto@mail.es</td>
+						<td><%= providers[i].NIT %></td>
+						<td><%= providers[i].name %></td>
+						<td><%= providers[i].email %></td>
+						<td><%= providers[i].phone %></td>
+						<td><%= providers[i].address %></td>
 						<td><input type="checkbox" name="select"></td>
 						<td class="bg-dark text-center">
-							<a href="#" data-toggle="modal" data-target="#providerEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
-							<a href="#" data-toggle="modal" data-target="#providerDelete"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+							<a href="#" data-toggle="modal" data-target="#providerEdit<%= i %>"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+							<a href="#" data-toggle="modal" data-target="#providerDelete<%= i %>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 						</td>
 					</tr>
+				<% } %>
 				</tbody>
 			</table>
 		</div>
-		<div class="w-25 mx-auto">
-			<a href="#" data-toggle="modal" data-target="#providerRegister"><button class="btn btn-outline-success">Agregar</button></a>
-			<button class="btn btn-success">Enviar</button>
+		<% for(var i = 0; i < providers.length; i++){ %>
+		<!-- modal to client edit -->
+		<div id="providerEdit<%= i %>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Editar proveedor</h4>
+					</div>
+					<div class="modal-body">
+						<form metod="POST">
+						<div class="row">
+							<div class="col-md-4 mb-3">
+								<label for="validationDefault01">Nit</label>
+								<input type="text" class="form-control" id="validationDefault01" value="<%= providers[i].NIT %>" name="nit" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="validationDefault02">Nombre</label>
+								<input type="text" class="form-control" id="validationDefault02" value="<%= providers[i].name %>" name="name" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="validationDefault03">Telefono</label>
+								<input type="text" class="form-control" id="validationDefault03" value="<%= providers[i].phone %>" name="phone" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8 mb-3">
+								<label for="validationDefault04">Correo-e</label>
+								<input type="text" class="form-control" id="validationDefault04" value="<%= providers[i].email %>" name="email" required>
+								<div class="invalid-feedback">
+									Escriba un correo Válido
+								</div>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="validationDefault05">Direccion</label>
+								<input type="text" class="form-control" id="validationDefault05" value="<%= providers[i].address %>" name="address" required>
+							</div>
+						</div>
+							<button class="btn btn-success" type="submit">Confirmar</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		<!-- Modal to delete -->
+		<div id="providerDelete<%= i %>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Confirmar Eliminación</h4>
+					</div>
+					<div class="modal-body">
+					<p> ¿Desea continuar con la eliminación del proveedor?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% } %>
+	</div>
+
+	<div class="w-25 mx-auto">
+		<a href="#" data-toggle="modal" data-target="#providerRegister"><button class="btn btn-outline-success">Agregar</button></a>
+		<button class="btn btn-success">Enviar</button>
 	</div>
 
 	<!-- modal to provider register -->
@@ -57,28 +130,32 @@
 					<h4 class="modal-title">Registrar proveedor</h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST">
+					<form action="" method="POST">
 					<div class="row">
 						<div class="col-md-4 mb-3">
 							<label for="validationDefault01">Nit</label>
 							<input type="text" class="form-control" id="validationDefault01" placeholder="Nit proveedor" name="nit" required>
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationDefault01">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault01" placeholder="Nombre proveedor" name="name" required>
+							<label for="validationDefault02">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="Nombre proveedor" name="name" required>
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault02" placeholder="telefono" name="phone" required>
+							<label for="validationDefault03">Telefono</label>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="telefono" name="phone" required>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 mb-3">
-							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Correo electronico" name="mail" required>
+						<div class="col-md-8 mb-3">
+							<label for="validationDefault04">Correo-e</label>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="Correo electronico" name="mail" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="validationDefault05">Direccion</label>
+							<input type="text" class="form-control" id="validationDefault05" placeholder="direccion" name="address" required>
 						</div>
 					</div>
 						<button class="btn btn-success" type="submit">Registrar</button>
@@ -86,66 +163,6 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- modal to client edit -->
-	<div id="providerEdit" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Editar proveedor</h4>
-				</div>
-				<div class="modal-body">
-					<form metod="POST">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault01">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault01" value="Nombre completo" name="name" required>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault02" value="telefono" name="phone" required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault03" value="Correo electronico" name="mail" required>
-							<div class="invalid-feedback">
-								Escriba un correo Válido
-							</div>
-						</div>
-					</div>
-						<button class="btn btn-success" type="submit">Confirmar</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal to delete -->
-	<div id="providerDelete" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Confirmar Eliminación</h4>
-				</div>
-				<div class="modal-body">
-				<p> ¿Desea continuar con la eliminación del proveedor?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>
 		</div>
