@@ -41,7 +41,7 @@ exports.addProvider = function(req, res) {
 	});
 
 	provider.save(function(err, provider) {
-		if(err) return res.status(500).send(err.message);
+		if(err) return res.status(500).send("hola");
 		res.status(200).jsonp(provider);
 	});
 };
@@ -50,12 +50,12 @@ exports.addProvider = function(req, res) {
 //Actualizar un registro proveedor en la DB (PUT)
 exports.updateProvider = function(req, res) {
 	Provider.findById(req.params.id, function(err, provider) {
-		provider.NIT= 			req.body.NIT,
+		//provider.NIT= 			req.body.NIT,
 		provider.name= 			req.body.name,
 		provider.email= 		req.body.email,
 		provider.phone= 		req.body.phone,
 		provider.address= 		req.body.address,
-		provider.products= 		req.body.products	//Verificar como se pasaria una lista de productos
+		//provider.products= 		req.body.products	//Verificar como se pasaria una lista de productos
 
 
 		provider.save(function(err) {
@@ -68,9 +68,15 @@ exports.updateProvider = function(req, res) {
 
 //Eliminar un registro proveedor de la BD (DELETE)
 exports.deleteProvider = function(req, res) {
-	Provider.findById(req.params.id, function(err, provider) {
+	
+	var idProvider = req.params.id;
+	
+	Provider.findById(idProvider, function(err, provider) {
 		provider.remove(function(err) {
-			if(err) return res.status(500).send(err.message);
+			if(err) return res.render('error', {
+				message: 'Se ha producido un error. Contacte con el administrador.',
+				error: null
+			});//res.status(500).send(err.message);
 			res.status(200).send();
 		});
 	});

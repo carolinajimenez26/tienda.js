@@ -26,7 +26,8 @@
 						<th>Nombre</th>
 						<th>Telefono</th>
 						<th>Correo-e</th>
-						
+						<th>Dirección</th>
+
 						<th></th>
 					</tr>
 				</thead>
@@ -41,14 +42,57 @@
 							<td><%=provider.name%></td>
 							<td><%=provider.phone%></td>
 							<td><%=provider.email%></td>
+							<td><%=provider.address%></td>
 							<!--<td><input type="checkbox" name="select"></td>-->
 							<td class="bg-dark text-center">
-								<a href="#" data-toggle="modal" data-target="#providerEdit"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+								<a href="#" data-toggle="modal" data-target="#providerEdit<%=provider.NIT%>"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
 								<a href="#" data-toggle="modal" data-target="#providerDelete<%=provider.NIT%>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 							</td>
 						</tr>
 
+						<!-- modal to client edit -->
+						<div id="providerEdit<%=provider.NIT%>" class="modal fade" role="dialog">
+							<div class="modal-dialog">
 
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">Editar proveedor</h4>
+									</div>
+									<div class="modal-body">
+										<form action="/providers/update/<%=provider._id%>" metod="GET">
+										<div class="row">
+											<div class="col-md-6 mb-3">
+												<label for="validationDefault01">Nombre</label>
+												<input type="text" class="form-control" id="validationDefault01" value="<%=provider.name%>" name="name" required>
+											</div>
+											<div class="col-md-6 mb-3">
+												<label for="validationDefault06">Telefono</label>
+												<input type="text" class="form-control" id="validationDefault02" value="<%=provider.phone%>" name="phone" required>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4 mb-3">
+												<label for="validationDefault06">Dirección</label>
+												<input type="text" class="form-control" id="validationDefault04" placeholder="<%=provider.address%>" name="address" required>
+											</div>
+											<div class="col-md-8 mb-3">
+												<label for="validationDefault03">Correo-e</label>
+												<input type="text" class="form-control" id="validationDefault03" value="<%=provider.email%>" name="mail" required>
+												<div class="invalid-feedback">
+													Escriba un correo Válido
+												</div>
+											</div>
+										</div>											
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-success" type="submit">Confirmar</button>
+										</form>
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
 
 						<!-- Modal to delete -->
 						<div id="providerDelete<%=provider.NIT%>" class="modal fade" role="dialog">
@@ -63,7 +107,7 @@
 									<p> ¿Desea continuar con la eliminación del proveedor?</p>
 									</div>
 									<div class="modal-footer">
-										<a href='/providers/delete/<%=provider%>?_method=DELETE'><button type="button" class="btn btn-success" >Confirmar</button></a>
+										<a href='/providers/delete/<%=provider._id%>'><button type="button" class="btn btn-success" >Confirmar</button></a>
 										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 									</div>
 								</div>
@@ -109,7 +153,11 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 mb-3">
+						<div class="col-md-4 mb-3">
+							<label for="validationDefault06">Dirección</label>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="dirección" name="address" required>
+						</div>
+						<div class="col-md-8 mb-3">
 							<label for="validationDefault03">Correo-e</label>
 							<input type="text" class="form-control" id="validationDefault03" placeholder="Correo electronico" name="mail" required>
 							<div class="invalid-feedback">
@@ -117,55 +165,19 @@
 							</div>
 						</div>
 					</div>
-						<button class="btn btn-success" type="submit">Registrar</button>
-					</form>
+						
+					
 				</div>
 				<div class="modal-footer">
+					<button class="btn btn-success" type="submit">Registrar</button>
+					</form>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- modal to client edit -->
-	<div id="providerEdit" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Editar proveedor</h4>
-				</div>
-				<div class="modal-body">
-					<form metod="POST">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault01">Nombre</label>
-							<input type="text" class="form-control" id="validationDefault01" value="Nombre completo" name="name" required>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationDefault06">Telefono</label>
-							<input type="text" class="form-control" id="validationDefault02" value="telefono" name="phone" required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault03" value="Correo electronico" name="mail" required>
-							<div class="invalid-feedback">
-								Escriba un correo Válido
-							</div>
-						</div>
-					</div>
-						<button class="btn btn-success" type="submit">Confirmar</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	
 

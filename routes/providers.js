@@ -8,9 +8,9 @@ router.get('/', providerController.findAllProviders);
 
 router.post('/register', providerController.addProvider);
 
-router.put('/update/:id', providerController.updateProvider);
+router.get('/update/:id', providerController.updateProvider);
 
-router.delete('/delete/:id', providerController.deleteProvider);
+router.get('/delete/:id', providerController.deleteProvider);
 
 
 module.exports = router;
