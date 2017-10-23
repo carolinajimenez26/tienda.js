@@ -60,25 +60,31 @@
 										<h4 class="modal-title">Editar proveedor</h4>
 									</div>
 									<div class="modal-body">
-										<form action="/providers/update/<%=provider._id%>" metod="GET">
+									
+										<form action="/providers/update" metod="POST">
 										<div class="row">
-											<div class="col-md-6 mb-3">
-												<label for="validationDefault01">Nombre</label>
-												<input type="text" class="form-control" id="validationDefault01" value="<%=provider.name%>" name="name" required>
+											<div class="col-md-4 mb-3">
+												<input type="hidden" name="_id" value="<%=provider._id%>">
+												<label for="validationDefault01">Nit</label>
+												<input type="text" class="form-control" id="validationDefault01" value="<%=provider.NIT%>" name="NIT" required>
 											</div>
-											<div class="col-md-6 mb-3">
-												<label for="validationDefault06">Telefono</label>
-												<input type="text" class="form-control" id="validationDefault02" value="<%=provider.phone%>" name="phone" required>
+											<div class="col-md-4 mb-3">
+												<label for="validationDefault02">Nombre</label>
+												<input type="text" class="form-control" id="validationDefault02" value="<%=provider.name%>" name="name" required>
+											</div>
+											<div class="col-md-4 mb-3">
+												<label for="validationDefault03">Telefono</label>
+												<input type="text" class="form-control" id="validationDefault03" value="<%=provider.phone%>" name="phone" required>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-4 mb-3">
-												<label for="validationDefault06">Dirección</label>
-												<input type="text" class="form-control" id="validationDefault04" placeholder="<%=provider.address%>" name="address" required>
+												<label for="validationDefault04">Dirección</label>
+												<input type="text" class="form-control" id="validationDefault04" name="address" value="<%=provider.address%>" required>
 											</div>
 											<div class="col-md-8 mb-3">
-												<label for="validationDefault03">Correo-e</label>
-												<input type="text" class="form-control" id="validationDefault03" value="<%=provider.email%>" name="mail" required>
+												<label for="validationDefault05">Correo-e</label>
+												<input type="text" class="form-control" id="validationDefault05" value="<%=provider.email%>" name="email" required>
 												<div class="invalid-feedback">
 													Escriba un correo Válido
 												</div>
@@ -159,7 +165,7 @@
 						</div>
 						<div class="col-md-8 mb-3">
 							<label for="validationDefault03">Correo-e</label>
-							<input type="text" class="form-control" id="validationDefault03" placeholder="Correo electronico" name="mail" required>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="Correo electronico" name="email" required>
 							<div class="invalid-feedback">
 								Escriba un correo Válido
 							</div>

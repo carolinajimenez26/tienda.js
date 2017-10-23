@@ -34,7 +34,7 @@ exports.addProvider = function(req, res) {
 	var provider = new Provider( {
 		NIT: 		req.body.nit,
 		name: 		req.body.name,
-		email: 		req.body.mail,
+		email: 		req.body.email,
 		phone: 		req.body.phone,
 		address: 	req.body.address,
 		products: 	req.body.products	//Verificar como se pasaria una lista de productos
@@ -49,12 +49,15 @@ exports.addProvider = function(req, res) {
 
 //Actualizar un registro proveedor en la DB (PUT)
 exports.updateProvider = function(req, res) {
-	Provider.findById(req.params.id, function(err, provider) {
-		//provider.NIT= 			req.body.NIT,
+	console.log("ENTROOOOO");
+	Provider.findById(req.body._id, function(err, provider) {
+		console.log('proveder', provider);
+		console.log('nit', req.body.NIT);
+		provider.NIT= 			req.body.NIT,
 		provider.name= 			req.body.name,
 		provider.email= 		req.body.email,
 		provider.phone= 		req.body.phone,
-		provider.address= 		req.body.address,
+		provider.address= 		req.body.address
 		//provider.products= 		req.body.products	//Verificar como se pasaria una lista de productos
 
 

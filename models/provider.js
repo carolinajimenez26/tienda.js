@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var ProviderSchema = new Schema({
     NIT: {
       type: String,
-      require: true
+      require: true,
+      unique: true
     },
     name: {
       type: String,

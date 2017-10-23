@@ -8,7 +8,7 @@ router.get('/', providerController.findAllProviders);
 
 router.post('/register', providerController.addProvider);
 
-router.get('/update/:id', providerController.updateProvider);
+router.post('/update', providerController.updateProvider);
 
 router.get('/delete/:id', providerController.deleteProvider);
 
