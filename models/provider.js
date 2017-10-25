@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var ProviderSchema = new Schema({
     NIT: {
       type: String,
-      require: true
+      require: true,
+      unique: true
     },
     name: {
       type: String,
@@ -22,11 +23,12 @@ var ProviderSchema = new Schema({
     },
     address: {
       type: String,
-      default: ''},
-    products: {
+      default: ''}
+    },
+  /*  products: {
       [ { type: String, require: true} ] // array de productos
     }
-}, {
+}, */{
   timestamp: true
 });
 

@@ -1,14 +1,20 @@
 var Product = require('../models/product');
+var Provider = require('../models/provider');
 
 
 //Retornar todos los productos
 exports.findAllProducts = function(req, res) {
-	Product.find(function(err, products) {
+	Provider.find(function(err, providersList) {
 		if(err) res.send(500, err.message);
 
-		console.log('GET /inventory');
-		res.status(200).jsonp(products);
+		Product.find(function(err, data) {
+		if(err) res.send(500, err.message);		
+		res.render('products',{products:data,providers:providersList});
 	});
+
+	});
+
+	
 };
 
 
@@ -39,35 +45,39 @@ exports.addProduct = function(req, res) {
 
 	product.save(function(err, product) {
 		if(err) return res.status(500).send(err.message);
-		res.status(200).jsonp(product);
+		//res.status(200).jsonp(product);
+		res.redirect('/products');
 	});
 };
 
 
 //Actualizar un registro producto en la DB (PUT)
-exports.updateProduct = function(req, res) {
-	Product.findById(req.params.id, function(err, product) {
-		product.code: 		req.body.code;
-		product.name: 		req.body.name;
-		product.amount: 	req.body.amount;
-		product.stock: 		req.body.stock;
-		product.suplier: 	req.body.suplier;
-		product.sales_unit: req.body.sales_unit;
+exports.updateProduct = function(req, res) {	
+	Product.findById(req.query._id, function(err, product) {
+		console.log('product', product);
+		product.code= 		req.query.code;
+		product.name= 		req.query.name;
+		product.amount= 	req.query.amount;
+		product.stock= 		req.query.stock;
+		product.suplier= 	req.query.suplier;
+		product.sales_unit= req.query.sales_unit;
 
 		product.save(function(err) {
 			if(err) return res.status(500).send(err.message);
-			res.status(200).jsonp(product);
+			//res.status(200).jsonp(product);
+			res.redirect('/products');
 		});
 	});
 };
 
 
 //Eliminar un registro producto de la BD (DELETE)
-exports.deleteProduct = function(req, res) {
+exports.deleteProduct = function(req, res) {	
 	Product.findById(req.params.id, function(err, product) {
 		product.remove(function(err) {
 			if(err) return res.status(500).send(err.message);
-			res.status(200).send();
+			//res.status(200).send();
+			res.redirect('/products');
 		});
 	});
 };

@@ -1,14 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var Verify = require('./verify');
-var clientController = require('../controllers/client');
+var userController = require('../controllers/user');
 
-router.get('/', Verify.verifyAdmin, clientController.findAllClients);
+router.get('/', /*Verify.verifyAdmin, */userController.findAllUsers);
 
-router.post('/register', clientController.registerClient);
+router.post('/register', userController.registerUser);
 
-router.post('/login', clientController.login);
+router.get('/update', userController.updateUser);
 
-router.get('/logout', clientController.logout);
+router.get('/delete/:id', userController.deleteUser);
+
+router.post('/login', userController.login);
+
+router.get('/logout', userController.logout);
 
 module.exports = router;

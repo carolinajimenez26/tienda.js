@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<% include head %>
+</head>
+<body>
+
+	<header>
+		<% include header_admin %>
+	</header>
+	
+	<nav class="navbar navbar-light bg-light mt-5">
+		<form class="form-inline mx-auto" method="GET">
+			<input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+		</form>
+	</nav>
+	<div class="row my-0 mx-auto" id="staff">
+
+
+
+
+		<%
+			for(var i = 0; i < products.length; i++)
+			{
+				var product = products[i];
+		%>
+
+		<div class="card p-2 m-2 col-xl-2 col-lg-2 col-md-4">
+			<div class="card-block p-2">
+				<h4 class="card-title text-center"><%=product.name%></h4>
+			</div>
+			<a href="#"><img class="card-img-top" src="product-image/1.jpg" alt="product"/></a>
+			<div class="card-block p-2">
+				<p class="card-text text-center">
+					Disponibles: <%=product.amount%>
+				</p>
+			</div>
+			<span class="text-center bg-dark">
+				<a href="#" data-toggle="modal" data-target="#productMore<%=product.code%>"><img src="svg/more.svg" width="30px" class="p-1" alt="more"/></a>
+				<a href="#" data-toggle="modal" data-target="#productEdit<%=product.code%>"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
+				<a href="#" data-toggle="modal" data-target="#productDelete<%=product.code%>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+			</span>
+		</div>
+
+
+
+		<!-- Modal to View more -->
+		<div id="productMore<%=product.code%>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Información</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<label for="staticName" class="col-sm-2 col-form-label">Código</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.code%>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticName" class="col-sm-2 col-form-label">Nombre</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.name%>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticName" class="col-sm-2 col-form-label">Cantidad</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.amount%>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=product.sales_unit%>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticName" class="col-sm-2 col-form-label">Stock minimo</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.stock%>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticEmail" class="col-sm-2 col-form-label">Proveedor</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=product.suplier%>">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!-- modal to edit -->	
+			<div id="productEdit<%=product.code%>" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Editar producto</h4>
+						</div>
+						<div class="modal-body">
+							<form action="/products/update" metod="GET">
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<input type="hidden" name="_id" value="<%=product._id%>">
+									<label for="validationDefault01">Código</label>
+									<input type="text" class="form-control" id="validationDefault01" value="<%=product.code%>" name="code" required>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="validationDefault02">Nombre</label>
+									<input type="text" class="form-control" id="validationDefault02" value="<%=product.name%>" name="name" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label for="validationDefault03">Cantidad</label>
+									<input type="text" class="form-control" id="validationDefault03" value="<%=product.amount%>" name="amount" required>
+									<div class="invalid-feedback">
+										Escriba un correo Válido
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="validationDefault03">Unidad</label>
+										<select class="form-control" id="unitSelect" id="validationDefault03" name="sales_unit" required>
+											<option><%=product.sales_unit%></option>
+										<% 
+											if(product.sales_unit=='Botellas'){
+										%>	
+											<option>Libras</option>
+											<option>Cajas</option>
+											<option>Bolsas</option>
+										<% } %>
+										<% 
+											if(product.sales_unit=='Libras'){
+										%>	
+											<option>Botellas</option>
+											<option>Cajas</option>
+											<option>Bolsas</option>
+										<% } %>
+										<% 
+											if(product.sales_unit=='Cajas'){
+										%>	
+											<option>Botellas</option>
+											<option>Libras</option>
+											<option>Bolsas</option>
+										<% } %>
+										<% 
+											if(product.sales_unit=='Bolsas'){
+										%>	
+											<option>Botellas</option>
+											<option>Libras</option>
+											<option>Cajas</option>											
+										<% } %>
+										</select>
+									
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label for="validationDefault04">Stock minimo</label>
+									<input type="text" class="form-control" id="validationDefault04" value="<%=product.stock%>" name="stock" required>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="validationDefault05">Proveedor</label>
+									<select class="form-control" name="suplier"> 
+										<% 
+										for(var j = 0; j < providers.length; j++)
+										{
+
+											var provider = providers[j];
+											if (providers[j].name==product.suplier){
+
+										%>                
+			                                <option><%=provider.name%></option>                                    
+			                            <% } } %>  
+			                            <% 
+										for(var j = 0; j < providers.length; j++)
+										{
+
+											var provider = providers[j];
+											if (providers[j].name!=product.suplier){
+
+										%>                
+			                                <option><%=provider.name%></option>                                    
+			                            <% } } %>       
+                                    </select>
+								</div>
+							</div>								
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-success" type="submit">Confirmar</button>
+							</form>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<!-- Modal to delete -->
+			<div id="productDelete<%=product.code%>" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Confirmar Eliminación</h4>
+						</div>
+						<div class="modal-body">
+						<p> ¿Desea continuar con la eliminación del producto <%=product.name%>?</p>
+						</div>
+						<div class="modal-footer">
+							<a href='/products/delete/<%=product._id%>'><button type="button" class="btn btn-success" >Confirmar</button></a>							
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<% } %>	
+
+		
+
+		<div class="card bg-success p-2 m-2 col-xl-2 col-lg-2 col-md-4">
+			<a href="#" data-toggle="modal" data-target="#productRegister"><img class="card-img-top" src="svg/add-product.svg" alt="add product"/></a>
+			<div class="card-block p-2">
+				<h4 class="card-title text-center text-white">Agregar</h4>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal to register -->	
+	<div id="productRegister" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Registrar producto</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/products/register" method="POST">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault01">Código</label>
+							<input type="text" class="form-control" id="validationDefault01" placeholder="código prod" name="code" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault02">Nombre</label>
+							<input type="text" class="form-control" id="validationDefault02" placeholder="Nombre prod" name="name" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Cantidad</label>
+							<input type="text" class="form-control" id="validationDefault03" placeholder="cantidad prod" name="amount" required>
+							<div class="invalid-feedback">
+								Escriba un correo Válido
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault03">Unidad</label>
+								<select class="form-control" id="unitSelect" id="validationDefault03" name="sales_unit" required>
+									<option>Botellas</option>
+									<option>Libras</option>
+									<option>Cajas</option>
+									<option>Bolsas</option>
+								</select>							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault04">Stock minimo</label>
+							<input type="text" class="form-control" id="validationDefault04" placeholder="cant min" name="stock" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault05">Proveedor</label>
+							<select class="form-control" name="suplier"> 
+							<% 
+							for(var j = 0; j < providers.length; j++)
+							{
+								var provider = providers[j];
+							%>                                            
+                                              
+                                              <option><%=provider.name%></option>                                    
+                            <% } %>        
+                            </select>
+							<!--<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" name="suplier" required>-->
+						</div>
+					</div>						
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit">Registrar</button>
+					</form>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+	<footer>
+		<% include footer %>
+	</footer>
+</body>
+</html>
