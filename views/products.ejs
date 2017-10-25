@@ -59,7 +59,7 @@
 							<div class="row">
 								<label for="staticName" class="col-sm-2 col-form-label">Código</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.code%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticCode" value="<%=product.code%>">
 								</div>
 							</div>
 							<div class="row">
@@ -71,25 +71,31 @@
 							<div class="row">
 								<label for="staticName" class="col-sm-2 col-form-label">Cantidad</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.amount%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticAmount" value="<%=product.amount%>">
+								</div>
+							</div>
+							<div class="row">
+								<label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
+								<div class="col-sm-10">
+									<input type="text" readonly class="form-control-plaintext" id="staticPrice" value="<%=product.price%>">
 								</div>
 							</div>
 							<div class="row">
 								<label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=product.sales_unit%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticUnit" value="<%=product.sales_unit%>">
 								</div>
 							</div>
 							<div class="row">
 								<label for="staticName" class="col-sm-2 col-form-label">Stock minimo</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticName" value="<%=product.stock%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticStock" value="<%=product.stock%>">
 								</div>
 							</div>
 							<div class="row">
 								<label for="staticEmail" class="col-sm-2 col-form-label">Proveedor</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=product.suplier%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier%>">
 								</div>
 							</div>
 						</form>
@@ -200,7 +206,13 @@
 			                            <% } } %>       
                                     </select>
 								</div>
-							</div>								
+							</div>
+							<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault06">Precio</label>
+								<input type="text" class="form-control" id="validationDefault06" placeholder="precio" name="price" value="<%=product.price%>" required>
+							</div>
+						</div>								
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-success" type="submit">Confirmar</button>
@@ -271,9 +283,6 @@
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault03">Cantidad</label>
 							<input type="text" class="form-control" id="validationDefault03" placeholder="cantidad prod" name="amount" required>
-							<div class="invalid-feedback">
-								Escriba un correo Válido
-							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault03">Unidad</label>
@@ -304,7 +313,13 @@
                             </select>
 							<!--<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" name="suplier" required>-->
 						</div>
-					</div>						
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="validationDefault06">Precio</label>
+							<input type="text" class="form-control" id="validationDefault06" placeholder="precio" name="price" required>
+						</div>
+					</div>					
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-success" type="submit">Registrar</button>

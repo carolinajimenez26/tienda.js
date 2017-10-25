@@ -38,6 +38,7 @@ exports.addProduct = function(req, res) {
 		code: 		req.body.code,
 		name: 		req.body.name,
 		amount: 	req.body.amount,
+		price:      req.body.price,
 		stock: 		req.body.stock,
 		suplier: 	req.body.suplier,
 		sales_unit: req.body.sales_unit
@@ -58,6 +59,7 @@ exports.updateProduct = function(req, res) {
 		product.code= 		req.query.code;
 		product.name= 		req.query.name;
 		product.amount= 	req.query.amount;
+		product.price=      req.query.price;
 		product.stock= 		req.query.stock;
 		product.suplier= 	req.query.suplier;
 		product.sales_unit= req.query.sales_unit;

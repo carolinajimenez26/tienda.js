@@ -15,6 +15,10 @@ var ProductSchema = new Schema({
       type: Number,
       default: 0
     },
+    price: { // stock mínimo
+      type: Number,
+      require: true
+    },
     stock: { // stock mínimo
       type: Number,
       require: true
