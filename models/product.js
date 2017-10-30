@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var ProductSchema = new Schema({
     code: {
       type: String,
-      require: true
+      require: true,
+      unique: true
     },
     name: {
       type: String,
@@ -14,13 +15,19 @@ var ProductSchema = new Schema({
       type: Number,
       default: 0
     },
+    price: { // stock mínimo
+      type: Number,
+      require: true
+    },
     stock: { // stock mínimo
       type: Number,
       require: true
     },
     suplier: {
-      type: mongoose.Schema.Types.ObjectId, // el proveedor que nos lo vende
-      ref: 'Provider'
+      type: String,
+      default: ''
+      //type: mongoose.Schema.Types.ObjectId, // el proveedor que nos lo vende
+      //ref: 'Provider'
     },
     sales_unit: { //unidad de venta (botella, libra, litro, bolsa)
       type: String,

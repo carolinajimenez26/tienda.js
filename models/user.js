@@ -7,7 +7,8 @@ var UserSchema = new Schema({
       type: String,
       max: 10,
       min: 1,
-      require : true
+      require : true,
+      unique: true
     },
     password : {
       type: String,
