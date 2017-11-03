@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Informes Empresa </title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css"/>
+
+
+</head>
+
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top p-3">
+		<a class="navbar-brand font-weight-bold" href="#">tienda.js</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mx-auto">
+				<button class="btn btn-success mx-1" onclick="location.href='index_admin.html'">Home</button>
+				<button class="btn btn-warning mx-1" onclick="location.href='caja_admin.html'">Caja</button>
+				<button class="btn btn-success mx-1" onclick="location.href='inventory_admin.html'">Inventario</button>
+				<button class="btn btn-success mx-1" onclick="location.href='report.html'">Reportes</button>
+				<button class="btn btn-success mx-1" onclick="location.href='staff.html'">Personal</button>
+				<button class="btn btn-success mx-1" onclick="location.href='providers.html'">Proveedores</button>
+				<button class="btn btn-success mx-1" onclick="location.href='clients_admin.html'">Clientes</button>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Cerrar sesion</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	</br>
+	</br>
+
+	<h1>Ventas Del Año</h1>
+	<hr/>
+	<h2>Año 2017</h2>
+
+	<p>
+		Modelo 'pie' para las ventas de todos los meses.
+	</p>
+
+
+	<div id="Ventas_mensual">
+		<canvas id= "Empresa" width="500" height="175"></canvas>
+	</div>
+
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		var datos =
+		{
+			type: "pie",
+			data : {
+				datasets :[ {
+						data : [
+
+				        	     5,10,15,20,25,30,35,40,45,50,60,70,
+				           		],
+				        	backgroundColor:[
+				        			     "#ffce56",
+				        			     "#46BFBD",
+				        			     "#FDB60C",
+				        			     "#FDB45C",
+				        			     "#4DB90F",
+				        			     "#949FB1",
+				        			     "#4D5360",
+				        			     "#4DB45C",
+				        			     "#cc65fe",
+				        			     "#36a2eb",
+				        			     "#4DF90F",
+				        			     "#ff6310",
+
+				                 ],
+				                  borderColor: [
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+				                  'rgba(255, 99, 132, 0.5)',
+
+
+					                ],
+            						borderWidth: 2
+
+				  	   }
+				    ],
+
+				    labels :  [
+							   "Enero","Febrero","Marzo","Abril","mayo","Junio","Julio", "Agosto","Septiembre","octubre","noviembre","diciembre",
+                         	  ]
+
+			        },
+			        options : {
+			        		    	responsive : true,
+			        		    	// sirva en dispositivos moviles
+			                    }
+
+		};
+
+		var canvas = document.getElementById('Empresa').getContext('2d');
+		window.pie = new Chart(canvas, datos);
+
+		setInterval(function()
+		{
+			//elimnar elementos
+			datos.data.datasets.splice(0);
+
+			var newData=
+			{
+				backgroundColor:
+					   [
+									 "#ffce56",
+					   			     "#46BFBD",
+				     			     "#FDB60C",
+	       	        			     "#FDB45C",
+			        			     "#4DB90F",
+				        		     "#949FB1",
+					        	     "#4D5360",
+					   			     "#4DB45C",
+				     			     "#cc65fe",
+	    	        			     "#36a2eb",
+			        			     "#4DF90F",
+				    			     "#ff6310",
+						],
+
+				data: [getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),getrandom(),]
+			};
+			datos.data.datasets.push(newData);
+			window.pie.update();
+			// SE PUEDEN TRAER DESDE LA BASE DE DATOS CON UN AJAX O SOCKET.
+		},3000)
+
+		function getrandom()
+		{
+			return Math.round(Math.random()*100);
+		}
+
+		});
+    </script>
+
+</body>
+</html>
