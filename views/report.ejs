@@ -10,17 +10,19 @@
 	</header>
 
 	<div class="col-md-4 col-sm-12 mx-auto my-5 border border-secondary" id="login">
-		<form>
+		<form action="/products/search" method="POST">
 			<div class="row">
 				<div class="col mb-3">
 					<label for="validationDefault01">Fecha Inicio</label>
 					<input type="date" class="form-control" id="validationDefault01" name="initdate" required>
+					<input type="time" class="form-control" id="validationDefault01" value="00:00" name="inittime" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col mb-3">
 					<label for="validationDefault02">Fecha cierre</label>
 					<input type="date" class="form-control" id="validationDefault02" name="finaldate" required>
+					<input type="time" class="form-control" id="validationDefault02" value="23:59" name="finaltime" required>
 				</div>
 			</div>
 			<div class="row">
@@ -28,9 +30,9 @@
 					<label for="validationDefault03">Tipo de reporte</label>
 					<select class="form-control" id="unitSelect" id="validationDefault03" name="report" required>
 						<option>&#32;</option>
-						<option>Compras</option>
-						<option>Ventas</option>
-						<option>Completo</option>
+						<option>Productos agregados</option>
+						<option>Productos modificados</option>
+						<option>Producto eliminados</option>
 					</select>
 				</div>
 			</div>
