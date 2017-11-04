@@ -18,8 +18,6 @@
 	<div class="row my-0 mx-auto" id="staff">
 
 
-
-
 		<%
 			for(var i = 0; i < products.length; i++)
 			{
@@ -95,7 +93,7 @@
 							<div class="row">
 								<label for="staticEmail" class="col-sm-2 col-form-label">Proveedor</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier.name%>">
 								</div>
 							</div>
 						</form>
@@ -120,10 +118,9 @@
 							<h4 class="modal-title">Editar producto</h4>
 						</div>
 						<div class="modal-body">
-							<form action="/products/update" metod="GET">
+							<form action="/products/update/<%=product._id%>" metod="GET">
 							<div class="row">
 								<div class="col-md-6 mb-3">
-									<input type="hidden" name="_id" value="<%=product._id%>">
 									<label for="validationDefault01">Código</label>
 									<input type="text" class="form-control" id="validationDefault01" value="<%=product.code%>" name="code" required>
 								</div>

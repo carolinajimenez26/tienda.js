@@ -4,11 +4,13 @@ var productController = require('../controllers/product');
 
 router.get('/', productController.findAllProducts);
 
-//router.get('/products/:id', productController.findById);
+router.get('/:id', productController.findById);
+
+router.get('/search/:id', productController.search);
 
 router.post('/register', productController.addProduct);
 
-router.get('/update', productController.updateProduct);
+router.get('/update/:id', productController.updateProduct);
 
 router.get('/delete/:id', productController.deleteProduct);
 

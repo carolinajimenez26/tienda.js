@@ -5,23 +5,28 @@ var Provider = require('../models/provider');
 //Retornar todos los productos
 exports.findAllProducts = function(req, res) {
 	Provider.find(function(err, providersList) {
-		if(err) res.status(500).render('error', {message: err.message});
+		if(err) return res.status(500).send(err.message);
 
-		Product.find(function(err, data) {
-		if(err) res.send(500, err.message);
-		res.render('products',{products: data, providers: providersList});
+		Product.find({})
+			.populate('suplier')
+			.exec(function (err, productList) {
+				if (err) return res.status(500).send(err.message);
+				res.render('products', {products: productList, providers: providersList});
+			});
 	});
-
-	});
-
-
 };
 
+exports.search = function(req, res) {
+	Product.findById(req.params.id, function(err, product) {
+		if(err) return res.status(500).send(err.message);
+		res.send("createdAt: " + product.createdAt + " \nupdatedAt: " + product.updatedAt);
+	});
+};
 
 //Retorna un producto especificando el ID
 exports.findById = function(req, res) {
 	Product.findById(req.params.id, function(err, product) {
-		if(err) return res.status(500).render('error', {message: err.message});
+		if(err) return res.status(500).send(err.message);
 
 		console.log('GET /inventory/' + req.params.id);
 		res.status(200).jsonp(product);
@@ -44,7 +49,7 @@ exports.addProduct = function(req, res) {
 	});
 
 	product.save(function(err, product) {
-		if(err) return res.status(500).render('error', {message: err.message});
+		if(err) return res.status(500).send(err.message);
 		//res.status(200).jsonp(product);
 		res.redirect('/products');
 	});
@@ -53,7 +58,7 @@ exports.addProduct = function(req, res) {
 
 //Actualizar un registro producto en la DB (PUT)
 exports.updateProduct = function(req, res) {
-	Product.findById(req.query._id, function(err, product) {
+	Product.findById(req.params.id, function(err, product) {
 		product.code= 		req.query.code;
 		product.name= 		req.query.name;
 		product.amount= 	req.query.amount;
@@ -63,7 +68,7 @@ exports.updateProduct = function(req, res) {
 		product.sales_unit= req.query.sales_unit;
 
 		product.save(function(err) {
-			if(err) return res.status(500).render('error', {message: err.message});
+			if(err) return res.status(500).send(err.message);
 			//res.status(200).jsonp(product);
 			res.redirect('/products');
 		});
@@ -75,7 +80,7 @@ exports.updateProduct = function(req, res) {
 exports.deleteProduct = function(req, res) {
 	Product.findById(req.params.id, function(err, product) {
 		product.remove(function(err) {
-			if(err) return res.status(500).render('error', {message: err.message});
+			if(err) return res.status(500).send(err.message);
 			//res.status(200).send();
 			res.redirect('/products');
 		});
