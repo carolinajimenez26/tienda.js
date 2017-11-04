@@ -17,9 +17,16 @@ exports.findAllProducts = function(req, res) {
 };
 
 exports.search = function(req, res) {
-	Product.findById(req.params.id, function(err, product) {
+	console.log("SEARCH!!!!");
+	var query = {
+		createdAt: {
+      $gte: new Date(2017, 9, 10), // 2017, 9, 10, 11, 13, 0 || October 10, 2017 || October 10, 2017 11:13:00
+      $lt: new Date("December 13, 2017 11:13:00")
+    }
+	};
+	Product.find(query, function(err, productList) {
 		if(err) return res.status(500).send(err.message);
-		res.send("createdAt: " + product.createdAt + " \nupdatedAt: " + product.updatedAt);
+		res.status(200).jsonp(productList);
 	});
 };
 
