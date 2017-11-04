@@ -8,7 +8,7 @@
 	<header>
 		<% include header_admin %>
 	</header>
-	
+
 	<nav class="navbar navbar-light bg-light mt-5">
 		<form class="form-inline mx-auto" method="GET">
 			<input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" aria-label="Search">
@@ -110,7 +110,7 @@
 
 
 
-		<!-- modal to edit -->	
+		<!-- modal to edit -->
 			<div id="productEdit<%=product.code%>" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 
@@ -144,36 +144,36 @@
 									<label for="validationDefault03">Unidad</label>
 										<select class="form-control" id="unitSelect" id="validationDefault03" name="sales_unit" required>
 											<option><%=product.sales_unit%></option>
-										<% 
+										<%
 											if(product.sales_unit=='Botellas'){
-										%>	
+										%>
 											<option>Libras</option>
 											<option>Cajas</option>
 											<option>Bolsas</option>
 										<% } %>
-										<% 
+										<%
 											if(product.sales_unit=='Libras'){
-										%>	
+										%>
 											<option>Botellas</option>
 											<option>Cajas</option>
 											<option>Bolsas</option>
 										<% } %>
-										<% 
+										<%
 											if(product.sales_unit=='Cajas'){
-										%>	
+										%>
 											<option>Botellas</option>
 											<option>Libras</option>
 											<option>Bolsas</option>
 										<% } %>
-										<% 
+										<%
 											if(product.sales_unit=='Bolsas'){
-										%>	
+										%>
 											<option>Botellas</option>
 											<option>Libras</option>
-											<option>Cajas</option>											
+											<option>Cajas</option>
 										<% } %>
 										</select>
-									
+
 								</div>
 							</div>
 							<div class="row">
@@ -183,27 +183,27 @@
 								</div>
 								<div class="col-md-6 mb-3">
 									<label for="validationDefault05">Proveedor</label>
-									<select class="form-control" name="suplier"> 
-										<% 
+									<select class="form-control" name="suplier">
+										<%
 										for(var j = 0; j < providers.length; j++)
 										{
 
 											var provider = providers[j];
 											if (providers[j].name==product.suplier){
 
-										%>                
-			                                <option><%=provider.name%></option>                                    
-			                            <% } } %>  
-			                            <% 
+										%>
+			                            <option value="<%=provider._id%>"><%=provider.name%></option>
+			                            <% } } %>
+			                            <%
 										for(var j = 0; j < providers.length; j++)
 										{
 
 											var provider = providers[j];
 											if (providers[j].name!=product.suplier){
 
-										%>                
-			                                <option><%=provider.name%></option>                                    
-			                            <% } } %>       
+										%>
+			                                <option value="<%=provider._id%>"><%=provider.name%></option>
+			                            <% } } %>
                                     </select>
 								</div>
 							</div>
@@ -212,7 +212,7 @@
 								<label for="validationDefault06">Precio</label>
 								<input type="text" class="form-control" id="validationDefault06" placeholder="precio" name="price" value="<%=product.price%>" required>
 							</div>
-						</div>								
+						</div>
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-success" type="submit">Confirmar</button>
@@ -239,16 +239,16 @@
 						<p> ¿Desea continuar con la eliminación del producto <%=product.name%>?</p>
 						</div>
 						<div class="modal-footer">
-							<a href='/products/delete/<%=product._id%>'><button type="button" class="btn btn-success" >Confirmar</button></a>							
+							<a href='/products/delete/<%=product._id%>'><button type="button" class="btn btn-success" >Confirmar</button></a>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
 				</div>
 			</div>
 
-		<% } %>	
+		<% } %>
 
-		
+
 
 		<div class="card bg-success p-2 m-2 col-xl-2 col-lg-2 col-md-4">
 			<a href="#" data-toggle="modal" data-target="#productRegister"><img class="card-img-top" src="svg/add-product.svg" alt="add product"/></a>
@@ -258,7 +258,7 @@
 		</div>
 	</div>
 
-	<!-- modal to register -->	
+	<!-- modal to register -->
 	<div id="productRegister" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
@@ -291,7 +291,7 @@
 									<option>Libras</option>
 									<option>Cajas</option>
 									<option>Bolsas</option>
-								</select>							
+								</select>
 						</div>
 					</div>
 					<div class="row">
@@ -301,16 +301,16 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault05">Proveedor</label>
-							<select class="form-control" name="suplier"> 
-							<% 
-							for(var j = 0; j < providers.length; j++)
-							{
-								var provider = providers[j];
-							%>                                            
-                                              
-                                              <option><%=provider.name%></option>                                    
-                            <% } %>        
-                            </select>
+							<select class="form-control" name="suplier">
+								<%
+								for(var j = 0; j < providers.length; j++)
+								{
+									var provider = providers[j];
+								%>
+	                <option value="<%=provider._id%>"><%=provider.name%></option>
+
+	              <% } %>
+              </select>
 							<!--<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" name="suplier" required>-->
 						</div>
 					</div>
@@ -319,7 +319,7 @@
 							<label for="validationDefault06">Precio</label>
 							<input type="text" class="form-control" id="validationDefault06" placeholder="precio" name="price" required>
 						</div>
-					</div>					
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-success" type="submit">Registrar</button>
@@ -331,7 +331,7 @@
 	</div>
 
 
-	
+
 
 	<footer>
 		<% include footer %>

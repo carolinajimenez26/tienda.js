@@ -31,7 +31,7 @@ exports.addProvider = function(req, res) {
 	console.log('POST');
 	console.log(req.body);
 
-	var provider = new Provider( {
+	var provider = new Provider({
 		NIT: 		req.body.nit,
 		name: 		req.body.name,
 		email: 		req.body.email,
@@ -44,25 +44,25 @@ exports.addProvider = function(req, res) {
 		if(err) return res.status(500).send(err.message);
 		res.redirect('/providers');
 		//res.status(200).jsonp(provider);
-	});		
+	});
 };
 
 
 //Actualizar un registro proveedor en la DB (PUT)
 exports.updateProvider = function(req, res) {
-	
+
 	//console.log("ENTROOOOO");
 	//console.log(req.query._id);
-	
+
 	Provider.findById(req.query._id, function(err, provider) {
 		console.log('provider', provider);
-		
+
 		provider.NIT= 			req.query.NIT,
 		provider.name= 			req.query.name,
 		provider.email= 		req.query.email,
 		provider.phone= 		req.query.phone,
 		provider.address= 		req.query.address
-		
+
 		//provider.products= 		req.body.products	//Verificar como se pasaria una lista de productos
 
 
@@ -77,9 +77,9 @@ exports.updateProvider = function(req, res) {
 
 //Eliminar un registro proveedor de la BD (DELETE)
 exports.deleteProvider = function(req, res) {
-	
+
 	var idProvider = req.params.id;
-	
+
 	Provider.findById(idProvider, function(err, provider) {
 		provider.remove(function(err) {
 			if(err) return res.render('error', {
