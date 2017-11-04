@@ -15,6 +15,6 @@ router.post('/login', userController.login);
 
 router.get('/logout', userController.logout);
 
-router.get('/send-email', userController.sendEmail);
+router.post('/send-email', userController.sendEmail);
 
 module.exports = router;
