@@ -1,5 +1,6 @@
 var Provider = require('../models/provider');
-
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
 
 //Retornar todos los proveedores
 exports.findAllProviders = function(req, res) {
@@ -90,4 +91,35 @@ exports.deleteProvider = function(req, res) {
 			res.redirect('/providers');
 		});
 	});
+};
+
+exports.sendEmail = function(req, res, next) {
+
+  var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'tiendajss', // Your email id
+            pass: 'tiendajs123' // Your password
+        }
+  });
+
+  var mailOptions = {
+    to: req.body.email, // list of receivers
+    subject: req.body.subject, // Subject line
+    html: req.body.message
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+        console.log(error);
+        return res.render('error', {
+					message: 'Se ha producido un error. Contacte con el administrador.',
+					error: null
+				});
+    } else {
+        console.log('Mensaje enviado: ' + info.response);
+        //res.render('index.ejs');
+        res.redirect('/providers');
+    };
+  });
 };

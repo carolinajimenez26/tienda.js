@@ -102,9 +102,9 @@ exports.updateUser = function(req, res) {
 
 ///Eliminar un registro proveedor de la BD (DELETE)
 exports.deleteUser = function(req, res) {
-  
+
   var idUser = req.params.id;
-  
+
   User.findById(idUser, function(err, user) {
     user.remove(function(err) {
       if(err) return res.render('error', {
