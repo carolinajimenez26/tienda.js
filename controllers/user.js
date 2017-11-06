@@ -1,8 +1,6 @@
 var User = require('../models/user');
 var passport = require('passport');
 var Verify = require('../routes/verify');
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
 
 //Retornar todos los useres
 exports.findAllUsers = function(req, res, next) {
@@ -104,9 +102,9 @@ exports.updateUser = function(req, res) {
 
 ///Eliminar un registro proveedor de la BD (DELETE)
 exports.deleteUser = function(req, res) {
-  
+
   var idUser = req.params.id;
-  
+
   User.findById(idUser, function(err, user) {
     user.remove(function(err) {
       if(err) return res.render('error', {
@@ -118,37 +116,3 @@ exports.deleteUser = function(req, res) {
     });
   });
 };
-
-
-exports.sendEmail = function(req, res, next) {
-  var name = "caro";//req.body.username;
-  var email = "caro@gmail.com";//req.body.email;
-  var from_ = '"' + name + '" <' + email + '>';
-  var message = "Holiiiiiiiiiiiii";//req.body.ccoment;
-
-  var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'tiendajss', // Your email id
-            pass: '' // Your password
-        }
-  });
-
-  var mailOptions = {
-    from: from_, // sender address
-    to: 'carolina.jimenez@utp.edu.co', // list of receivers
-    subject: 'Mensaje desde tienda-js', // Subject line
-    html:  "<p><strong>From : " + email + "</strong></p><p>" + message + "</p>",
-  };
-
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-        console.log(error);
-        res.render('error.ejs', { message : 'NO SE PUDO ENVIAR EL MENSAJE' });
-    } else {
-        console.log('Mensaje enviado: ' + info.response);
-        //res.render('index.ejs');
-        res.redirect('/users');
-    };
-  });
-}
