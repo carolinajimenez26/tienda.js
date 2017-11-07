@@ -10,13 +10,9 @@
 	</header>
 
 	<nav class="navbar navbar-light bg-light mt-5">
-		<form class="form-inline mx-auto" method="GET">
-			<input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-		</form>
+			<a class="mx-auto" href="#" data-toggle="modal" data-target="#productReport"><button class="btn btn-outline-success my-2 my-sm-0">Generar Reporte</button></a>
 	</nav>
 	<div class="row my-0 mx-auto" id="staff">
-
 
 		<%
 			for(var i = 0; i < products.length; i++)
@@ -40,7 +36,6 @@
 				<a href="#" data-toggle="modal" data-target="#productDelete<%=product.code%>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 			</span>
 		</div>
-
 
 
 		<!-- Modal to View more -->
@@ -93,7 +88,7 @@
 							<div class="row">
 								<label for="staticEmail" class="col-sm-2 col-form-label">Proveedor</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier.name%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier%>">
 								</div>
 							</div>
 						</form>
@@ -104,9 +99,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
 
 		<!-- modal to edit -->
 			<div id="productEdit<%=product.code%>" class="modal fade" role="dialog">
@@ -221,8 +213,6 @@
 			</div>
 
 
-
-
 			<!-- Modal to delete -->
 			<div id="productDelete<%=product.code%>" class="modal fade" role="dialog">
 				<div class="modal-dialog">
@@ -327,7 +317,51 @@
 		</div>
 	</div>
 
+	<!-- modal to report -->
+	<div id="productReport" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Registrar producto</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/products/search" method="POST">
+						<div class="row">
+							<div class="col mb-3">
+								<label for="validationDefault01">Fecha Inicio</label>
+								<input type="date" class="form-control" id="validationDefault01" name="initdate" required>
+								<input type="time" class="form-control" id="validationDefault01" value="00:00" name="inittime" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3">
+								<label for="validationDefault02">Fecha cierre</label>
+								<input type="date" class="form-control" id="validationDefault02" name="finaldate" required>
+								<input type="time" class="form-control" id="validationDefault02" value="23:59" name="finaltime" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3">
+								<label for="validationDefault03">Tipo de reporte</label>
+								<select class="form-control" id="unitSelect" id="validationDefault03" name="report" required>
+									<option>&#32;</option>
+									<option>Productos agregados</option>
+									<option>Productos modificados</option>
+									<!-- <option>Producto eliminados</option> -->
+								</select>
+							</div>
+						</div>
+						<button class="btn btn-success" type="submit">Generar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<footer>
