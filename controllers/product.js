@@ -18,14 +18,14 @@ exports.findAllProducts = function(req, res) {
 
 exports.search = function(req, res) {
 	if (req.body) {
-		// var initdate = req.body.initdate.split("-");
+		var initdate = req.body.initdate.split("-");
 		// console.log("initdate : ", initdate);
-		// var inittime = req.body.inittime.split(":");
+		var inittime = req.body.inittime.split(":");
 		// console.log("inittime : ", inittime);
 		//
-		// var finaldate = req.body.finaldate.split("-");
+		var finaldate = req.body.finaldate.split("-");
 		// console.log("finaldate : ", finaldate);
-		// var finaltime = req.body.finaltime.split(":");
+		var finaltime = req.body.finaltime.split(":");
 		// console.log("finaltime : ", finaltime);
 
 		if (req.body.report == 'Productos agregados') {
@@ -37,7 +37,9 @@ exports.search = function(req, res) {
 			};
 			Product.find(query, function(err, productList) {
 				if(err) return res.status(500).send(err.message);
-				res.status(200).jsonp(productList);
+				//res.status(200).jsonp(productList);
+				console.log("retorna ", productList);
+				res.render('reportView', {result: productList, type: "agregados"});
 			});
 		} else { // req.body.report == 'Productos modificados'
 			var query = {
@@ -48,7 +50,9 @@ exports.search = function(req, res) {
 			};
 			Product.find(query, function(err, productList) {
 				if(err) return res.status(500).send(err.message);
-				res.status(200).jsonp(productList);
+				//res.status(200).jsonp(productList);
+				console.log("retorna ", productList);
+				res.render('reportView', {result: productList, type: "modificados"});
 			});
 		}
 	} else {
