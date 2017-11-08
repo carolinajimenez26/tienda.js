@@ -14,11 +14,11 @@
 		</form>
 	</nav>
 
-	
-	
 
-	<div class="container">                                                                                    
-		<div class="table-responsive">          
+
+
+	<div class="container">
+		<div class="table-responsive">
 			<table class="table">
 				<thead>
 					<tr>
@@ -60,7 +60,7 @@
 										<h4 class="modal-title">Editar proveedor</h4>
 									</div>
 									<div class="modal-body">
-									
+
 										<form action="/providers/update" metod="GET">
 										<div class="row">
 											<div class="col-md-4 mb-3">
@@ -89,7 +89,7 @@
 													Escriba un correo Válido
 												</div>
 											</div>
-										</div>											
+										</div>
 									</div>
 									<div class="modal-footer">
 										<button class="btn btn-success" type="submit">Confirmar</button>
@@ -123,13 +123,13 @@
 
 
 
-					<% } %>					
+					<% } %>
 				</tbody>
 			</table>
 		</div>
 		<div class="w-25 mx-auto">
 			<a href="#" data-toggle="modal" data-target="#providerRegister"><button class="btn btn-outline-success">Agregar</button></a>
-			<!--<button class="btn btn-success">Enviar</button>-->
+			<a href="#" data-toggle="modal" data-target="#staffSend"><button class="btn btn-success">Enviar correo</button></a>
 		</div>
 	</div>
 
@@ -171,8 +171,8 @@
 							</div>
 						</div>
 					</div>
-						
-					
+
+
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-success" type="submit">Registrar</button>
@@ -183,9 +183,46 @@
 		</div>
 	</div>
 
-	
+	<!-- Modal to Send Email -->
+		<div id="staffSend" class="modal fade" role="dialog">
+			<div class="modal-dialog">
 
-	
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Enviar correo</h4>
+					</div>
+					<div class="modal-body">
+						<form action="/providers/send-email" method="POST">
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault01">Destinatario</label>
+								<input type="text" class="form-control" id="validationDefault01" placeholder="correo electronico" name="email" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="validationDefault02">Asunto</label>
+								<input type="text" class="form-control" id="validationDefault02" placeholder="Asunto" name="subject">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 mb-3">
+								<label for="validationDefault03">Contenido</label>
+								<textarea class="form-control" id="validationDefault03" name="message" required></textarea>
+							</div>
+						</div>
+
+
+							<button class="btn btn-success" type="submit">Enviar</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	<footer>
 		<% include footer %>

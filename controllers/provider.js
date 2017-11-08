@@ -1,5 +1,6 @@
 var Provider = require('../models/provider');
-
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
 
 //Retornar todos los proveedores
 exports.findAllProviders = function(req, res) {
@@ -44,25 +45,25 @@ exports.addProvider = function(req, res) {
 		if(err) return res.status(500).send(err.message);
 		res.redirect('/providers');
 		//res.status(200).jsonp(provider);
-	});		
+	});
 };
 
 
 //Actualizar un registro proveedor en la DB (PUT)
 exports.updateProvider = function(req, res) {
-	
+
 	//console.log("ENTROOOOO");
 	//console.log(req.query._id);
-	
+
 	Provider.findById(req.query._id, function(err, provider) {
 		console.log('provider', provider);
-		
+
 		provider.NIT= 			req.query.NIT,
 		provider.name= 			req.query.name,
 		provider.email= 		req.query.email,
 		provider.phone= 		req.query.phone,
 		provider.address= 		req.query.address
-		
+
 		//provider.products= 		req.body.products	//Verificar como se pasaria una lista de productos
 
 
@@ -77,9 +78,9 @@ exports.updateProvider = function(req, res) {
 
 //Eliminar un registro proveedor de la BD (DELETE)
 exports.deleteProvider = function(req, res) {
-	
+
 	var idProvider = req.params.id;
-	
+
 	Provider.findById(idProvider, function(err, provider) {
 		provider.remove(function(err) {
 			if(err) return res.render('error', {
@@ -90,4 +91,35 @@ exports.deleteProvider = function(req, res) {
 			res.redirect('/providers');
 		});
 	});
+};
+
+exports.sendEmail = function(req, res, next) {
+
+  var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'tiendajss', // Your email id
+            pass: 'tiendajs123' // Your password
+        }
+  });
+
+  var mailOptions = {
+    to: req.body.email, // list of receivers
+    subject: req.body.subject, // Subject line
+    html: req.body.message
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+        console.log(error);
+        return res.render('error', {
+					message: 'Se ha producido un error. Contacte con el administrador.',
+					error: null
+				});
+    } else {
+        console.log('Mensaje enviado: ' + info.response);
+        //res.render('index.ejs');
+        res.redirect('/providers');
+    };
+  });
 };
