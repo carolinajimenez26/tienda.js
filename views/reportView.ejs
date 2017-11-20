@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 	<link rel="stylesheet" href="../stylesheets/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="../stylesheets/style.css"/>
-	<title>title | tienda.js</title>
+	<title>Reporte | tienda.js</title>
 </head>
 <body>
 
@@ -13,12 +13,12 @@
 		<% include header_admin %>
 	</header>
 
-	<div class="container my-5">                                                                                    
+	<div id="container" class="container my-5">                                                                                    
 		<div class="table-responsive">          
-			<table class="table">
+			<table id="report" class="table">
 				<thead>
 					<tr>
-						<th colspan="5" class="text-center"><img src="../img/tiendajs-logo-green.png"></th>
+						<th colspan="5" class="text-center tiendajs-logo"><img src="../img/tiendajs-logo-green.png"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,9 +54,46 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+		<div id="print">
+			<button id="printToPDF" class="btn btn-success"">Generar PDF</button>
+			<button id="printToXLS" class="btn btn-success"">Generar EXCEL</button>
+		</div>
 
 	<footer>
-		<% include footer %>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/popper.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/html2canvas.min.js"></script>
+		<script src="../js/jsPDF.js"></script>
+		<script src="../js/jquery.table2excel.min.js"></script>
 	</footer>
+	<script type="text/javascript">
+		// print to PDF
+		$(function() { 
+        	$("#printToPDF").click(function() { 
+            	html2canvas($("#container"), {
+                	onrendered: function(canvas) {
+                    	theCanvas = canvas;
+                    	doc = new jsPDF('landscape');
+                    	doc.addImage(canvas, 'PNG', 10, 0, $("#container").width()*0.25, $("#container").height()*0.2);
+                    	d = new Date();
+						doc.save(
+					  	"reporte-"+d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+"-"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()
+					  	);
+            		}
+            	});
+        	});
+    	});
+
+    	// print to XLS
+		$("#printToXLS").click(function(){
+			d = new Date();
+			$("#report").table2excel({
+				exclude: ".tiendajs-logo",
+		    	filename: "reporte-"+d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+"-"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()
+			}); 
+		});
+	</script>
 </body>
 </html>
