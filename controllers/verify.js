@@ -8,6 +8,29 @@ exports.getToken = function (user) {
     });
 };
 
+exports.verify = function (req, res, next) {
+
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  if (token) {
+      // verifies secret and checks exp
+      jwt.verify(token, config.secretKey, function (err, decoded) {
+          var admin = decoded._doc.admin;
+          if (err) {
+            res.render('error', {message: 'You are not authenticated!'});
+          } else if (admin) {
+            res.redirect('../home_admin');
+          } else {
+            req.decoded = decoded;
+            res.redirect('../home');
+          }
+      });
+  } else {
+      // res.render('error', {message: 'No token provided!'});
+      res.redirect('/login');
+  }
+}
+
 exports.verifyOrdinaryUser = function (req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];

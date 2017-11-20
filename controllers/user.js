@@ -1,6 +1,6 @@
 var User = require('../models/user');
 var passport = require('passport');
-var Verify = require('../routes/verify');
+var Verify = require('./verify');
 
 //Retornar todos los useres
 exports.findAllUsers = function(req, res, next) {
@@ -13,25 +13,42 @@ exports.findAllUsers = function(req, res, next) {
 
 exports.login = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    console.log("user: ", user);
+    // console.log("user: ", user);
     if (err) {
-      return next(err);
+      // return next(err);
+      return next({
+        'flag':false,
+        'err': err.message
+      });
     }
     if (!user) {
-      return res.status(401).json({
-        err: info
+      // return res.status(401).json({
+      //   err: info
+      // });
+      return next({
+        'flag':false,
+        'err': info
       });
     }
     req.logIn(user, function(err) {
       if (err) {
 
-        return res.status(500).json({
-          err: 'Could not log in user'
+        // return res.status(500).json({
+        //   err: 'Could not log in user'
+        // });
+        return next({
+          'flag':false,
+          'err': 'Could not log in user'
         });
       }
 
       var token = Verify.getToken(user);
-      res.redirect('/users');
+      req.body.token = token;
+      return next({
+        'flag':true,
+        'token': token,
+        'user': user
+      });
       /*
       res.status(200).json({
         status: 'Login successful!',
@@ -40,7 +57,7 @@ exports.login = function(req, res, next) {
       });*/
     });
   })(req,res,next);
-}
+};
 
 exports.logout = function(req, res) {
   req.logout();
@@ -49,7 +66,7 @@ exports.logout = function(req, res) {
   res.status(200).json({
     status: 'Bye!'
   });*/
-}
+};
 
 //Retorna un usere especificando el ID
 exports.findById = function(req, res) {
@@ -62,8 +79,11 @@ exports.findById = function(req, res) {
 };
 
 exports.registerUser = function(req, res) {
+  // req.body.username = 'admin';
+  // req.body.password = 'admin';
   User.register(new User({ username : req.body.username }),
   req.body.password, function(err, user) {
+    // user.admin = true;
     if (err) {
       return res.status(500).json({err: err});
     }
@@ -82,7 +102,7 @@ exports.registerUser = function(req, res) {
     });
 
   });
-}
+};
 
 //Actualizar un registro usere en la DB (PUT)
 exports.updateUser = function(req, res) {
