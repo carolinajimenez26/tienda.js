@@ -4,15 +4,28 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Verify.verify(req, res, next);
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var decoded = Verify.verify(token);
+  if (decoded._doc.admin) res.redirect('/home_admin');
+  else if (decoded) res.redirect('/home');
+  else res.redirect('/login');
 });
 
-router.get('/home', /*Verify.verifyOrdinaryUser,*/ function(req, res, next) {
-  res.render('index', {firstname: req.firstname, lastname: req.lastname});
+router.get('/home_admin',function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.render('index_admin', {firstname: "", lastname: ""});
+    else res.redirect('../login');
+  }
+  else res.redirect('../login');
 });
 
-router.get('/home_admin', /*Verify.verifyAdmin,*/ function(req, res, next) {
-  res.render('index_admin', {firstname: req.firstname, lastname: req.lastname});
+router.get('/home', function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var decoded = Verify.verify(token);
+  if (decoded) res.render('index', {firstname: "", lastname: ""});
+  else res.redirect('../login');
 });
 
 router.get('/login', function(req, res, next) {
