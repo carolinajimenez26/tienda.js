@@ -32,7 +32,7 @@ exports.addProvider = function(req, res) {
 	console.log('POST');
 	console.log(req.body);
 
-	var provider = new Provider( {
+	var provider = new Provider({
 		NIT: 		req.body.nit,
 		name: 		req.body.name,
 		email: 		req.body.email,

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<link rel="stylesheet" href="../stylesheets/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../stylesheets/style.css"/>
+	<title>title | tienda.js</title>
+</head>
+<body>
+
+	<header>
+		<% include header_admin %>
+	</header>
+
+	<div class="container my-5">                                                                                    
+		<div class="table-responsive">          
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="5" class="text-center"><img src="../img/tiendajs-logo-green.png"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Fecha</th>
+						<th>Id producto</th>
+						<th>Producto</th>
+						<th>Cantidad</th>
+						<th>Precio</th>
+					</tr>
+					<% for(var i = 0; i < result.length; i++){ %>
+
+						<%if(type == "agregados"){ %>
+							<tr>
+								<td><%= result[i].createdAt%></td>
+								<td><%= result[i].code%></td>
+								<td><%= result[i].name%></td>
+								<td><%= result[i].amount%></td>
+								<td><%= result[i].price%></td>
+							</tr>
+						<% } else if(type == "modificados"){ %>
+							<tr>
+								<td><%= result[i].updatedAt%></td>
+								<td><%= result[i].code%></td>
+								<td><%= result[i].name%></td>
+								<td><%= result[i].amount%></td>
+								<td><%= result[i].price%></td>
+							</tr>
+						<%}else{%>
+							error papu
+						<%}%>
+					<%}%>
+				</tbody>
+			</table>
+		</div>
+
+	<footer>
+		<% include footer %>
+	</footer>
+</body>
+</html>

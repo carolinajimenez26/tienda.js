@@ -8,17 +8,11 @@
 	<header>
 		<% include header_admin %>
 	</header>
-	
+
 	<nav class="navbar navbar-light bg-light mt-5">
-		<form class="form-inline mx-auto" method="GET">
-			<input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-		</form>
+			<a class="mx-auto" href="#" data-toggle="modal" data-target="#productReport"><button class="btn btn-outline-success my-2 my-sm-0">Generar Reporte</button></a>
 	</nav>
 	<div class="row my-0 mx-auto" id="staff">
-
-
-
 
 		<%
 			for(var i = 0; i < products.length; i++)
@@ -42,7 +36,6 @@
 				<a href="#" data-toggle="modal" data-target="#productDelete<%=product.code%>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
 			</span>
 		</div>
-
 
 
 		<!-- Modal to View more -->
@@ -95,7 +88,7 @@
 							<div class="row">
 								<label for="staticEmail" class="col-sm-2 col-form-label">Proveedor</label>
 								<div class="col-sm-10">
-									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier%>">
+									<input type="text" readonly class="form-control-plaintext" id="staticProvider" value="<%=product.suplier.name%>">
 								</div>
 							</div>
 						</form>
@@ -107,10 +100,7 @@
 			</div>
 		</div>
 
-
-
-
-		<!-- modal to edit -->	
+		<!-- modal to edit -->
 			<div id="productEdit<%=product.code%>" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 
@@ -120,10 +110,9 @@
 							<h4 class="modal-title">Editar producto</h4>
 						</div>
 						<div class="modal-body">
-							<form action="/products/update" metod="GET">
+							<form action="/products/update/<%=product._id%>" metod="GET">
 							<div class="row">
 								<div class="col-md-6 mb-3">
-									<input type="hidden" name="_id" value="<%=product._id%>">
 									<label for="validationDefault01">Código</label>
 									<input type="text" class="form-control" id="validationDefault01" value="<%=product.code%>" name="code" required>
 								</div>
@@ -144,36 +133,36 @@
 									<label for="validationDefault03">Unidad</label>
 										<select class="form-control" id="unitSelect" id="validationDefault03" name="sales_unit" required>
 											<option><%=product.sales_unit%></option>
-										<% 
+										<%
 											if(product.sales_unit=='Botellas'){
-										%>	
+										%>
 											<option>Libras</option>
 											<option>Cajas</option>
 											<option>Bolsas</option>
 										<% } %>
-										<% 
+										<%
 											if(product.sales_unit=='Libras'){
-										%>	
+										%>
 											<option>Botellas</option>
 											<option>Cajas</option>
 											<option>Bolsas</option>
 										<% } %>
-										<% 
+										<%
 											if(product.sales_unit=='Cajas'){
-										%>	
+										%>
 											<option>Botellas</option>
 											<option>Libras</option>
 											<option>Bolsas</option>
 										<% } %>
-										<% 
+										<%
 											if(product.sales_unit=='Bolsas'){
-										%>	
+										%>
 											<option>Botellas</option>
 											<option>Libras</option>
-											<option>Cajas</option>											
+											<option>Cajas</option>
 										<% } %>
 										</select>
-									
+
 								</div>
 							</div>
 							<div class="row">
@@ -183,27 +172,27 @@
 								</div>
 								<div class="col-md-6 mb-3">
 									<label for="validationDefault05">Proveedor</label>
-									<select class="form-control" name="suplier"> 
-										<% 
+									<select class="form-control" name="suplier">
+										<%
 										for(var j = 0; j < providers.length; j++)
 										{
 
 											var provider = providers[j];
 											if (providers[j].name==product.suplier){
 
-										%>                
-			                                <option><%=provider.name%></option>                                    
-			                            <% } } %>  
-			                            <% 
+										%>
+			                            <option value="<%=provider._id%>"><%=provider.name%></option>
+			                            <% } } %>
+			                            <%
 										for(var j = 0; j < providers.length; j++)
 										{
 
 											var provider = providers[j];
 											if (providers[j].name!=product.suplier){
 
-										%>                
-			                                <option><%=provider.name%></option>                                    
-			                            <% } } %>       
+										%>
+			                                <option value="<%=provider._id%>"><%=provider.name%></option>
+			                            <% } } %>
                                     </select>
 								</div>
 							</div>
@@ -212,7 +201,7 @@
 								<label for="validationDefault06">Precio</label>
 								<input type="text" class="form-control" id="validationDefault06" placeholder="precio" name="price" value="<%=product.price%>" required>
 							</div>
-						</div>								
+						</div>
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-success" type="submit">Confirmar</button>
@@ -222,8 +211,6 @@
 					</div>
 				</div>
 			</div>
-
-
 
 
 			<!-- Modal to delete -->
@@ -239,16 +226,16 @@
 						<p> ¿Desea continuar con la eliminación del producto <%=product.name%>?</p>
 						</div>
 						<div class="modal-footer">
-							<a href='/products/delete/<%=product._id%>'><button type="button" class="btn btn-success" >Confirmar</button></a>							
+							<a href='/products/delete/<%=product._id%>'><button type="button" class="btn btn-success" >Confirmar</button></a>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
 				</div>
 			</div>
 
-		<% } %>	
+		<% } %>
 
-		
+
 
 		<div class="card bg-success p-2 m-2 col-xl-2 col-lg-2 col-md-4">
 			<a href="#" data-toggle="modal" data-target="#productRegister"><img class="card-img-top" src="svg/add-product.svg" alt="add product"/></a>
@@ -258,7 +245,7 @@
 		</div>
 	</div>
 
-	<!-- modal to register -->	
+	<!-- modal to register -->
 	<div id="productRegister" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
@@ -291,7 +278,7 @@
 									<option>Libras</option>
 									<option>Cajas</option>
 									<option>Bolsas</option>
-								</select>							
+								</select>
 						</div>
 					</div>
 					<div class="row">
@@ -301,16 +288,16 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationDefault05">Proveedor</label>
-							<select class="form-control" name="suplier"> 
-							<% 
-							for(var j = 0; j < providers.length; j++)
-							{
-								var provider = providers[j];
-							%>                                            
-                                              
-                                              <option><%=provider.name%></option>                                    
-                            <% } %>        
-                            </select>
+							<select class="form-control" name="suplier" required>
+								<%
+								for(var j = 0; j < providers.length; j++)
+								{
+									var provider = providers[j];
+								%>
+	                <option value="<%=provider._id%>"><%=provider.name%></option>
+
+	              <% } %>
+              </select>
 							<!--<input type="text" class="form-control" id="validationDefault05" placeholder="proveedor del producto" name="suplier" required>-->
 						</div>
 					</div>
@@ -319,7 +306,7 @@
 							<label for="validationDefault06">Precio</label>
 							<input type="text" class="form-control" id="validationDefault06" placeholder="precio" name="price" required>
 						</div>
-					</div>					
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-success" type="submit">Registrar</button>
@@ -330,8 +317,52 @@
 		</div>
 	</div>
 
+	<!-- modal to report -->
+	<div id="productReport" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
-	
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Registrar producto</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/products/search" method="POST">
+						<div class="row">
+							<div class="col mb-3">
+								<label for="validationDefault01">Fecha Inicio</label>
+								<input type="date" class="form-control" id="validationDefault01" name="initdate" required>
+								<input type="time" class="form-control" id="validationDefault01" value="00:00" name="inittime" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3">
+								<label for="validationDefault02">Fecha cierre</label>
+								<input type="date" class="form-control" id="validationDefault02" name="finaldate" required>
+								<input type="time" class="form-control" id="validationDefault02" value="23:59" name="finaltime" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3">
+								<label for="validationDefault03">Tipo de reporte</label>
+								<select class="form-control" id="unitSelect" id="validationDefault03" name="report" required>
+									<option>&#32;</option>
+									<option>Productos agregados</option>
+									<option>Productos modificados</option>
+									<!-- <option>Producto eliminados</option> -->
+								</select>
+							</div>
+						</div>
+						<button class="btn btn-success" type="submit">Generar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<footer>
 		<% include footer %>
