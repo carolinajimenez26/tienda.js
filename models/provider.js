@@ -25,11 +25,12 @@ var ProviderSchema = new Schema({
       type: String,
       default: ''}
     },
-  /*  products: {
-      [ { type: String, require: true} ] // array de productos
-    }
-}, */{
-  timestamp: true
+    // products: {
+    //   [ { type: String, require: true} ] // array de productos
+    // }
+//},
+{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Provider', ProviderSchema);

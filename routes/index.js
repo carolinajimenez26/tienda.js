@@ -1,59 +1,108 @@
 var express = require('express');
+var Verify = require('../controllers/verify');
+//var User = require('../models/user');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login');
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.redirect('/home_admin');
+    else res.redirect('/home');
+  }
+  else res.redirect('/login');
+});
+
+router.get('/home_admin',function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.render('index_admin', {firstname: "", lastname: ""});
+    else res.redirect('/login');
+  }
+  else res.redirect('/login');
 });
 
 router.get('/home', function(req, res, next) {
-  res.render('index_admin');
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.redirect('error');
+    else res.render('index', {firstname: "", lastname: ""});
+  } 
+  else res.redirect('/login');
 });
-
-router.get('/invoice', function(req, res, next) {
-  res.render('invoice_admin');
-});
-
-/*
-router.get('/inventory', function(req, res, next) {
-  res.render('inventory_admin');
-});
-*/
 
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+// Crear Factura
+router.get('/invoice_admin', function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.render('invoice_admin');
+    else res.redirect('error');
+  }
+  else res.redirect('error');
+});
+
+router.get('/invoice', function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    console.log("heeey ", decoded._doc.admin);
+    if (decoded._doc.admin) res.redirect('error');
+    else res.render('invoice');
+  }
+  else res.redirect('/error');
+});
+
+// Clientes
+router.get('/clients_admin', function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.render('clients_admin');
+    else res.redirect('error');
+  }
+  else res.redirect('error');
+});
+
 router.get('/clients', function(req, res, next) {
-  res.render('clients_admin');
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
+  var decoded = Verify.verify(token);
+  if (decoded) {
+    if (decoded._doc.admin) res.redirect('error'); 
+    else res.render('clients');
+  }
+  else res.redirect('/error');
+});
+
+// Error
+router.get('/error', function(req, res, next) {
+  res.render('error', {message: req.query.err});
 });
 
 /*
-router.get('/providers', function(req, res, next) {
-	let locals = {
-		providers : [
-			{NIT: "1001", name: "Colombina", email: "contacto@colombina.com", phone: "123 321", address: "cra 4 # 3 -29"},
-			{NIT: "1002", name: "Super", email: "contacto@super.com", phone: "456 789", address: "cra 6 # 28 -29"}
-		]
-	}
-  res.render('providers', locals);
+router.get('/reg', function(req, res){
+
+  var user = new User({
+        username:     'admin',
+        password:     'admin',
+        firstname:   'Gustavo',
+        lastname:      'Llano',
+        admin:    true        
+      });
+
+      user.save(function(err, user) {
+        if(err) return res.status(500).send(err.message);
+        //res.status(200).jsonp(product);
+        res.redirect('/');
+      });
+
 });
 */
-router.get('/report', function(req, res, next) {
-  res.render('report');
-});
-
-
-/*router.get('/staff', function(req, res, next) {
-  let locals = {
-  	clients : [ 
-  		 {username:"Caro", password:"rGFHFGjjkhgfgWEAaswqQWSe", firstname: "Carolina", lastname:"Jimenez"},
- 		 {username:"julidavid", password:"HJHgfFGGFWQWQWqqwredWE", firstname:"Julian", lastname:"Hoyos"},
- 		 {username:"tavo", password:"HJHgfFGGFWQWQWqqwredWE", firstname:"Gustavo", lastname:"Llano"}
-  	]
-  }
-  res.render('staff', locals);
-});*/
-
-
 module.exports = router;

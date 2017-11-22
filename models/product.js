@@ -24,17 +24,16 @@ var ProductSchema = new Schema({
       require: true
     },
     suplier: {
-      type: String,
-      default: ''
-      //type: mongoose.Schema.Types.ObjectId, // el proveedor que nos lo vende
-      //ref: 'Provider'
+      type: mongoose.Schema.Types.ObjectId, // el proveedor que nos lo vende
+      ref: 'Provider',
+      require: true
     },
     sales_unit: { //unidad de venta (botella, libra, litro, bolsa)
       type: String,
       default: ''
     }
 }, {
-  timestamp: true
+  timestamps: true
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

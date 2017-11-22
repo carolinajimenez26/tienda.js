@@ -8,6 +8,8 @@ router.get('/', providerController.findAllProviders);
 
 router.post('/register', providerController.addProvider);
 
+router.post('/send-email', providerController.sendEmail);
+
 router.get('/update', providerController.updateProvider);
 
 router.get('/delete/:id', providerController.deleteProvider);

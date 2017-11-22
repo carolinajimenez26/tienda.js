@@ -21,7 +21,7 @@ var ClientSchema = new Schema({
       max : 15
     }
 }, {
-  timestamp: true
+  timestamps: true
 });
 
 ClientSchema.methods.getName =  function () {
