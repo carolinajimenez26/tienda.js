@@ -15,7 +15,7 @@ exports.findAllProducts = function(req, res) {
 				.populate('suplier')
 				.exec(function (err, productList) {
 					if (err) return res.status(500).send(err.message);
-					res.render('products', {products: productList, providers: providersList});
+					res.render('products', {products: productList, providers: providersList, admin: decoded._doc.admin});
 				});
 		});
 	}

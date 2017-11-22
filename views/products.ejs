@@ -10,9 +10,10 @@
 	</header>
 
 	<nav class="navbar navbar-light bg-light mt-5">
-			<a class="mx-auto" href="#" data-toggle="modal" data-target="#productReport"><button class="btn btn-outline-success my-2 my-sm-0">Generar Reporte</button></a>
+			<a class="mx-auto" href="#" data-toggle="modal" data-target="#productReport"><button class="btn btn-outline-success my-2 my-sm-0">Generar Reporte</button></a>			
 	</nav>
 	<div class="row my-0 mx-auto" id="staff">
+
 
 		<%
 			for(var i = 0; i < products.length; i++)
@@ -32,8 +33,10 @@
 			</div>
 			<span class="text-center bg-dark">
 				<a href="#" data-toggle="modal" data-target="#productMore<%=product.code%>"><img src="svg/more.svg" width="30px" class="p-1" alt="more"/></a>
+				<% if (admin){ %>
 				<a href="#" data-toggle="modal" data-target="#productEdit<%=product.code%>"><img src="svg/edit.svg" width="30px" class="p-1" alt="edit"/></a>
 				<a href="#" data-toggle="modal" data-target="#productDelete<%=product.code%>"><img src="svg/delete.svg" width="30px" class="p-1" alt="delete"/></a>
+				<% } %>
 			</span>
 		</div>
 
@@ -99,7 +102,7 @@
 				</div>
 			</div>
 		</div>
-
+		<% if (admin){ %>
 		<!-- modal to edit -->
 			<div id="productEdit<%=product.code%>" class="modal fade" role="dialog">
 				<div class="modal-dialog">
@@ -211,8 +214,9 @@
 					</div>
 				</div>
 			</div>
+			<% } %>
 
-
+			<% if (admin){ %>
 			<!-- Modal to delete -->
 			<div id="productDelete<%=product.code%>" class="modal fade" role="dialog">
 				<div class="modal-dialog">
@@ -232,17 +236,19 @@
 					</div>
 				</div>
 			</div>
+			<% } %>
 
 		<% } %>
 
 
-
+		<% if (admin){ %>
 		<div class="card bg-success p-2 m-2 col-xl-2 col-lg-2 col-md-4">
 			<a href="#" data-toggle="modal" data-target="#productRegister"><img class="card-img-top" src="svg/add-product.svg" alt="add product"/></a>
 			<div class="card-block p-2">
 				<h4 class="card-title text-center text-white">Agregar</h4>
 			</div>
 		</div>
+		<% } %>
 	</div>
 
 	<!-- modal to register -->

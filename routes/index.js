@@ -1,5 +1,6 @@
 var express = require('express');
 var Verify = require('../controllers/verify');
+//var User = require('../models/user');
 var router = express.Router();
 
 /* GET home page. */
@@ -75,4 +76,23 @@ router.get('/error', function(req, res, next) {
   res.render('error', {message: req.query.err});
 });
 
+/*
+router.get('/reg', function(req, res){
+
+  var user = new User({
+        username:     'admin',
+        password:     'admin',
+        firstname:   'Gustavo',
+        lastname:      'Llano',
+        admin:    true        
+      });
+
+      user.save(function(err, user) {
+        if(err) return res.status(500).send(err.message);
+        //res.status(200).jsonp(product);
+        res.redirect('/');
+      });
+
+});
+*/
 module.exports = router;
