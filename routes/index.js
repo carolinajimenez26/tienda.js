@@ -27,7 +27,10 @@ router.get('/home_admin',function(req, res, next) {
 router.get('/home', function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
   var decoded = Verify.verify(token);
-  if (decoded) res.render('index', {firstname: "", lastname: ""});
+  if (decoded) {
+    if (decoded._doc.admin) res.redirect('error');
+    else res.render('index', {firstname: "", lastname: ""});
+  } 
   else res.redirect('/login');
 });
 
@@ -49,7 +52,11 @@ router.get('/invoice_admin', function(req, res, next) {
 router.get('/invoice', function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
   var decoded = Verify.verify(token);
-  if (decoded) res.render('invoice');
+  if (decoded) {
+    console.log("heeey ", decoded._doc.admin);
+    if (decoded._doc.admin) res.redirect('error');
+    else res.render('invoice');
+  }
   else res.redirect('/error');
 });
 
@@ -67,7 +74,10 @@ router.get('/clients_admin', function(req, res, next) {
 router.get('/clients', function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.jwttoken;
   var decoded = Verify.verify(token);
-  if (decoded) res.render('clients');
+  if (decoded) {
+    if (decoded._doc.admin) res.redirect('error'); 
+    else res.render('clients');
+  }
   else res.redirect('/error');
 });
 

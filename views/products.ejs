@@ -6,12 +6,18 @@
 <body>
 
 	<header>
-		<% include header %>
-	</header>
+		<% if(admin){ %>
+			<% include header_admin %>
+		<% } else { %>
+			<% include header %>
+		<% } %>
 
-	<nav class="navbar navbar-light bg-light mt-5">
-			<a class="mx-auto" href="#" data-toggle="modal" data-target="#productReport"><button class="btn btn-outline-success my-2 my-sm-0">Generar Reporte</button></a>			
-	</nav>
+	</header>
+	<% if (admin){ %>
+		<nav class="navbar navbar-light bg-light mt-5">
+				<a class="mx-auto" href="#" data-toggle="modal" data-target="#productReport"><button class="btn btn-outline-success my-2 my-sm-0">Generar Reporte</button></a>			
+		</nav>
+	<% } %>
 	<div class="row my-0 mx-auto" id="staff">
 
 
