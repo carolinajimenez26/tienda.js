@@ -28,6 +28,7 @@
 						<th>Producto</th>
 						<th>Cantidad</th>
 						<th>Precio</th>
+						<th>Proveedor</th>
 					</tr>
 					<% for(var i = 0; i < result.length; i++){ %>
 
@@ -38,6 +39,7 @@
 								<td><%= result[i].name%></td>
 								<td><%= result[i].amount%></td>
 								<td><%= result[i].price%></td>
+								<td><%= result[i].suplier.name%></td>
 							</tr>
 						<% } else if(type == "modificados"){ %>
 							<tr>
@@ -46,6 +48,7 @@
 								<td><%= result[i].name%></td>
 								<td><%= result[i].amount%></td>
 								<td><%= result[i].price%></td>
+								<td><%= result[i].suplier.name%></td>
 							</tr>
 						<%}else{%>
 							error papu

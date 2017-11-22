@@ -62,11 +62,21 @@ exports.search = function(req, res) {
 					    $lt: new Date(finaldate[0], finaldate[1] - 1, finaldate[2], finaltime[0], finaltime[1])
 					  }
 					};
-					Product.find(query, function(err, productList) {
+					/*Product.find(query, function(err, productList) {
 						if(err) return res.status(500).send(err.message);
 						//res.status(200).jsonp(productList);
 						console.log("retorna ", productList);
 						res.render('reportView', {result: productList, type: "agregados"});
+					});*/
+					Provider.find(function(err, providersList) {
+						if(err) return res.status(500).send(err.message);
+
+						Product.find(query)
+							.populate('suplier')
+							.exec(function (err, productList) {
+								if (err) return res.status(500).send(err.message);
+								res.render('reportView', {result: productList, type: "agregados"});
+							});
 					});
 				} else { // req.body.report == 'Productos modificados'
 					var query = {
@@ -75,11 +85,21 @@ exports.search = function(req, res) {
 							$lt: new Date(finaldate[0], finaldate[1] - 1, finaldate[2], finaltime[0], finaltime[1])
 						}
 					};
-					Product.find(query, function(err, productList) {
+					/*Product.find(query, function(err, productList) {
 						if(err) return res.status(500).send(err.message);
 						//res.status(200).jsonp(productList);
 						console.log("retorna ", productList);
 						res.render('reportView', {result: productList, type: "modificados"});
+					});*/
+					Provider.find(function(err, providersList) {
+						if(err) return res.status(500).send(err.message);
+
+						Product.find(query)
+							.populate('suplier')
+							.exec(function (err, productList) {
+								if (err) return res.status(500).send(err.message);
+								res.render('reportView', {result: productList, type: "agregados"});
+							});
 					});
 				}
 			} else {
