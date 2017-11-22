@@ -4,15 +4,17 @@
 	<% include head %>
 </head>
 <body>
-	<header>
-		<% include header %>
-	</header>
-<div class="container">
-	<h1>Error</h1>
-	<p><%= message %></p>
-</div>
-<footer>
-  <% include footer %>
-</footer>
+	<div class="fixed-top p-2 bg-success text-light text-center">
+	<nav class="navbar-dark bg-success fixed-top p-2 text-light text-center">
+		<h1>tienda.js</h1>
+	</div>
+	<div class="col-xl-6 col-lg-6 col-md-7 col-sm-9 mx-auto my-5 border border-secondary" id="login">
+		<h1 class="text-center">Error 404 Not Found</h1>
+		<a href="/"><button class="btn btn-success border-dark col-12">Volver</button></a>
+	</div>
+
+	<footer>
+		<% include footer %>
+	</footer>
 </body>
 </html>
